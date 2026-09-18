@@ -1,0 +1,141 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Menú principal | Aventura Matemática</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/navigation.js" defer></script>
+  </head>
+
+  <body>
+    <main class="menu-shell" aria-labelledby="menu-title">
+      <section class="menu-panel" aria-label="Menú principal">
+        <div class="corner-shape corner-shape-top" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-left" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-bottom" aria-hidden="true"></div>
+        <div class="dot-cluster dot-cluster-top" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="dot-cluster dot-cluster-bottom" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <header class="menu-header">
+          <div class="menu-brand-row">
+            <p class="menu-brand">Aventura Matemática</p>
+            <a class="back-home-button" href="../index.html" aria-label="Regresar a la pantalla de inicio">
+              <span aria-hidden="true">⌂</span>
+              <span>Inicio</span>
+            </a>
+          </div>
+
+          <h1 id="menu-title">Menú principal</h1>
+          <p class="menu-instruction">Elige una aventura para comenzar</p>
+
+          <div class="menu-score" aria-label="Puntaje acumulado">
+            <span class="score-coin" aria-hidden="true">0</span>
+            <p><span data-points>0</span> puntos</p>
+          </div>
+        </header>
+
+        <section class="menu-mati-card" aria-label="Mensaje de Mati">
+          <div class="mati-frame menu-mati-frame">
+            <img
+              class="mati-image"
+              src="../assets/images/mati.png"
+              alt="Mati, el explorador matemático"
+            />
+          </div>
+          <div class="menu-speech">
+            <p>¡Excelente! Ya estás listo para practicar.</p>
+            <p>Selecciona una actividad.</p>
+          </div>
+        </section>
+
+        <section class="menu-modules" aria-labelledby="modules-title">
+          <h2 id="modules-title">Operaciones básicas</h2>
+          <div class="module-grid">
+            <a class="module-card module-add" href="addition.html" aria-label="Practicar suma">
+              <span class="module-symbol" aria-hidden="true">+</span>
+              <span class="module-copy">
+                <strong>Sumar</strong>
+                <span>Junta cantidades y descubre el resultado.</span>
+              </span>
+            </a>
+
+            <a class="module-card module-subtract" href="subtraction.html" aria-label="Practicar resta">
+              <span class="module-symbol" aria-hidden="true">−</span>
+              <span class="module-copy">
+                <strong>Restar</strong>
+                <span>Quita cantidades y calcula cuánto queda.</span>
+              </span>
+            </a>
+
+            <a
+              class="module-card module-multiply"
+              href="multiplication.html"
+              aria-label="Practicar multiplicación"
+            >
+              <span class="module-symbol" aria-hidden="true">×</span>
+              <span class="module-copy">
+                <strong>Multiplicar</strong>
+                <span>Suma varias veces la misma cantidad.</span>
+              </span>
+            </a>
+
+            <a class="module-card module-divide" href="division.html" aria-label="Practicar división">
+              <span class="module-symbol" aria-hidden="true">÷</span>
+              <span class="module-copy">
+                <strong>Dividir</strong>
+                <span>Reparte cantidades en grupos iguales.</span>
+              </span>
+            </a>
+          </div>
+        </section>
+
+        <section class="challenge-section" aria-labelledby="challenge-title">
+          <a
+            class="challenge-card"
+            href="identify-operation.html"
+            aria-label="Reto de Mati: Identifica la operación"
+          >
+            <span class="challenge-label">Reto de Mati</span>
+            <span class="challenge-content">
+              <span>
+                <strong id="challenge-title">Identifica la operación</strong>
+                <span>Lee una situación y elige si necesitas sumar, restar, multiplicar o dividir.</span>
+              </span>
+              <span class="challenge-symbols" aria-hidden="true">
+                <span>+</span><span>−</span><span>×</span><span>÷</span>
+              </span>
+            </span>
+          </a>
+        </section>
+
+        <section class="future-section" aria-labelledby="future-title">
+          <h2 id="future-title">Próximas aventuras</h2>
+          <div class="future-grid">
+            <article class="future-card" aria-disabled="true">
+              <h3>Juegos educativos</h3>
+              <p>Próximamente</p>
+            </article>
+            <article class="future-card" aria-disabled="true">
+              <h3>Evaluación final</h3>
+              <p>Próximamente</p>
+            </article>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
