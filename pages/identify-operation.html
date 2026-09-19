@@ -1,0 +1,210 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Identifica la operación | Aventura Matemática</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <script src="../js/navigation.js" defer></script>
+    <script src="../js/identify-operation.js" defer></script>
+  </head>
+
+  <body>
+    <main class="identify-shell" aria-labelledby="identify-title">
+      <section class="identify-panel" aria-label="Actividad Identifica la operación">
+        <div class="corner-shape corner-shape-top" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-left" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-bottom" aria-hidden="true"></div>
+        <div class="dot-cluster dot-cluster-top" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="dot-cluster dot-cluster-bottom" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <header class="identify-header">
+          <div class="identify-topbar">
+            <p class="identify-brand">Aventura Matemática</p>
+            <a class="identify-home-link" href="../index.html">Inicio</a>
+          </div>
+
+          <p class="identify-label">Reto de Mati</p>
+          <h1 id="identify-title">Identifica la operación</h1>
+        </header>
+
+        <section class="identify-start" data-identify-start aria-labelledby="identify-start-title">
+          <div class="identify-start-copy">
+            <h2 id="identify-start-title">Lee, piensa y elige</h2>
+            <p>
+              Lee cada situación y selecciona la operación que utilizarías para resolverla.
+            </p>
+
+            <ul class="identify-symbol-list" aria-label="Significado de los símbolos">
+              <li class="identify-symbol-item identify-add"><span aria-hidden="true">+</span> Sumar</li>
+              <li class="identify-symbol-item identify-subtract"><span aria-hidden="true">−</span> Restar</li>
+              <li class="identify-symbol-item identify-multiply"><span aria-hidden="true">×</span> Multiplicar</li>
+              <li class="identify-symbol-item identify-divide"><span aria-hidden="true">÷</span> Dividir</li>
+            </ul>
+
+            <p class="identify-goal-note">Necesitas al menos 8 respuestas correctas para alcanzar el 80 %.</p>
+
+            <div class="identify-actions">
+              <button class="identify-primary-button" type="button" data-start-challenge>
+                Comenzar reto
+              </button>
+              <a class="identify-secondary-link" href="menu.html">Volver al menú</a>
+            </div>
+          </div>
+
+          <div class="identify-mati-card" aria-label="Mati acompaña el reto">
+            <div class="mati-frame identify-mati-frame">
+              <img
+                class="mati-image identify-mati-image"
+                src="../assets/images/mati-encouraging.png"
+                alt="Mati animando el reto"
+                data-mati-image
+              />
+            </div>
+            <p>¡Estoy listo para ayudarte a reconocer cada operación!</p>
+          </div>
+        </section>
+
+        <section class="identify-quiz" data-identify-quiz aria-labelledby="identify-question-title" hidden>
+          <div class="identify-quiz-status">
+            <p data-question-counter>Pregunta 1 de 10</p>
+            <p>Puntaje del reto: <strong data-attempt-points>0</strong></p>
+          </div>
+
+          <div class="identify-progress" aria-label="Progreso del reto">
+            <span data-progress-bar></span>
+          </div>
+
+          <div class="identify-question-layout">
+            <div class="identify-quiz-mati" aria-label="Mati acompaña la pregunta">
+              <div class="mati-frame identify-mati-frame">
+                <img
+                  class="mati-image identify-mati-image"
+                  src="../assets/images/mati.png"
+                  alt="Mati observando la pregunta"
+                  data-mati-image
+                />
+              </div>
+            </div>
+
+            <article class="identify-question-card">
+              <h2 id="identify-question-title" tabindex="-1">Situación</h2>
+              <p data-question-statement></p>
+            </article>
+          </div>
+
+          <div class="identify-options" role="group" aria-label="Opciones de operación">
+            <button class="identify-option identify-add" type="button" data-operation="suma">
+              <span aria-hidden="true">+</span>
+              <strong>Sumar</strong>
+            </button>
+            <button class="identify-option identify-subtract" type="button" data-operation="resta">
+              <span aria-hidden="true">−</span>
+              <strong>Restar</strong>
+            </button>
+            <button class="identify-option identify-multiply" type="button" data-operation="multiplicación">
+              <span aria-hidden="true">×</span>
+              <strong>Multiplicar</strong>
+            </button>
+            <button class="identify-option identify-divide" type="button" data-operation="división">
+              <span aria-hidden="true">÷</span>
+              <strong>Dividir</strong>
+            </button>
+          </div>
+
+          <p class="identify-feedback" data-feedback aria-live="polite"></p>
+
+          <div class="identify-actions">
+            <button class="identify-primary-button" type="button" data-next-question disabled>
+              Siguiente
+            </button>
+            <button class="identify-secondary-button" type="button" data-menu-warning-open>
+              Volver al menú
+            </button>
+          </div>
+        </section>
+
+        <div
+          class="identify-menu-modal"
+          data-menu-warning-modal
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="identify-menu-modal-title"
+          aria-describedby="identify-menu-modal-description"
+          hidden
+        >
+          <div class="identify-menu-dialog">
+            <h2 id="identify-menu-modal-title">Salir del reto</h2>
+            <p id="identify-menu-modal-description">
+              Si sales, perderás las respuestas de este intento.
+            </p>
+            <div class="identify-menu-actions">
+              <a class="identify-menu-confirm" href="menu.html">Salir</a>
+              <button class="identify-menu-cancel" type="button" data-menu-warning-cancel>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
+
+        <section class="identify-results" data-identify-results aria-labelledby="identify-results-title" hidden>
+          <div class="identify-result-mati" aria-label="Mensaje visual de Mati">
+            <div class="mati-frame identify-mati-frame">
+              <img
+                class="mati-image identify-mati-image"
+                src="../assets/images/mati-encouraging.png"
+                alt="Mati animando para seguir practicando"
+                data-mati-image
+              />
+            </div>
+          </div>
+          <div class="identify-result-badge" data-result-badge aria-hidden="true"></div>
+          <h2 id="identify-results-title" tabindex="-1">Resultados del reto</h2>
+          <p class="identify-result-status" data-result-status></p>
+          <p class="identify-mati-message" data-result-message></p>
+
+          <dl class="identify-result-grid">
+            <div>
+              <dt>Correctas</dt>
+              <dd data-result-correct>0</dd>
+            </div>
+            <div>
+              <dt>Incorrectas</dt>
+              <dd data-result-incorrect>0</dd>
+            </div>
+            <div>
+              <dt>Porcentaje</dt>
+              <dd data-result-percent>0 %</dd>
+            </div>
+            <div>
+              <dt>Puntos</dt>
+              <dd data-result-points>0</dd>
+            </div>
+          </dl>
+
+          <p class="identify-new-points" data-result-new-points></p>
+
+          <div class="identify-actions">
+            <button class="identify-primary-button" type="button" data-retry-challenge>
+              Intentar de nuevo
+            </button>
+            <a class="identify-secondary-link" href="menu.html">Volver al menú</a>
+          </div>
+        </section>
+      </section>
+    </main>
+  </body>
+</html>
