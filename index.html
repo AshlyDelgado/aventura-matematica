@@ -1,0 +1,85 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Aventura Matemática</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="icon" href="data:," />
+    <link rel="stylesheet" href="css/styles.css" />
+  </head>
+
+  <body>
+    <main class="home-shell" aria-labelledby="main-title">
+      <section class="home-card" aria-label="Inicio">
+        <div class="corner-shape corner-shape-top" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-left" aria-hidden="true"></div>
+        <div class="corner-shape corner-shape-bottom" aria-hidden="true"></div>
+        <div class="dot-cluster dot-cluster-top" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+        <div class="dot-cluster dot-cluster-bottom" aria-hidden="true">
+          <span></span><span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+        <header class="hero">
+          <span class="star star-main" aria-hidden="true">★</span>
+          <h1 id="main-title" class="brand-title">
+            <span>Aventura</span>
+            <span>Matemática</span>
+          </h1>
+          <div class="dashed-path" aria-hidden="true">
+            <span>★</span>
+          </div>
+        </header>
+
+        <section class="mati-zone" aria-label="Saludo de Mati">
+          <div class="mati-frame">
+            <img
+              class="mati-image"
+              src="assets/images/mati.png"
+              alt="Mati, el explorador matemático"
+            />
+          </div>
+          <div class="speech-bubble">
+            <p>¡Hola! Soy Mati.</p>
+            <p>¿Qué practicamos hoy?</p>
+          </div>
+        </section>
+
+        <section class="operations-preview" aria-label="Operaciones matemáticas">
+          <ul class="operations-list">
+            <li class="operation-item operation-add">
+              <span class="operation-symbol" aria-hidden="true">+</span>
+              <span>Sumar</span>
+            </li>
+            <li class="operation-item operation-subtract">
+              <span class="operation-symbol" aria-hidden="true">−</span>
+              <span>Restar</span>
+            </li>
+            <li class="operation-item operation-multiply">
+              <span class="operation-symbol" aria-hidden="true">×</span>
+              <span>Multiplicar</span>
+            </li>
+            <li class="operation-item operation-divide">
+              <span class="operation-symbol" aria-hidden="true">÷</span>
+              <span>Dividir</span>
+            </li>
+          </ul>
+        </section>
+
+        <a class="start-button" href="pages/menu.html">
+          <span>¡Comenzar!</span>
+          <span class="play-icon" aria-hidden="true"></span>
+        </a>
+      </section>
+    </main>
+  </body>
+</html>
