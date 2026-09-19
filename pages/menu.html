@@ -33,20 +33,46 @@
         <header class="menu-header">
           <div class="menu-brand-row">
             <p class="menu-brand">Aventura Matemática</p>
-            <a class="back-home-button" href="../index.html" aria-label="Regresar a la pantalla de inicio">
-              <span aria-hidden="true">⌂</span>
-              <span>Inicio</span>
-            </a>
+            <div class="menu-top-actions">
+              <a class="back-home-button" href="../index.html" aria-label="Regresar a la pantalla de inicio">
+                <span aria-hidden="true">⌂</span>
+                <span>Inicio</span>
+              </a>
+            </div>
           </div>
 
-          <h1 id="menu-title">Menú principal</h1>
+          <h1 id="menu-title" class="visually-hidden">Menú principal</h1>
           <p class="menu-instruction">Elige una aventura para comenzar</p>
 
           <div class="menu-score" aria-label="Puntaje acumulado">
-            <span class="score-coin" aria-hidden="true">0</span>
             <p><span data-points>0</span> puntos</p>
           </div>
         </header>
+
+        <div
+          class="menu-exit-modal"
+          data-exit-modal
+          role="dialog"
+          aria-modal="true"
+          aria-labelledby="exit-modal-title"
+          aria-describedby="exit-modal-description"
+          hidden
+        >
+          <div class="menu-exit-dialog">
+            <h2 id="exit-modal-title">Salir de la aventura</h2>
+            <p id="exit-modal-description">
+              Si sales, volverás al inicio y tu puntaje quedará en 0.
+            </p>
+            <div class="menu-exit-actions">
+              <button class="menu-exit-confirm" type="button" data-exit-confirm>
+                Salir
+              </button>
+              <button class="menu-exit-cancel" type="button" data-exit-cancel>
+                Cancelar
+              </button>
+            </div>
+          </div>
+        </div>
 
         <section class="menu-mati-card" aria-label="Mensaje de Mati">
           <div class="mati-frame menu-mati-frame">
@@ -134,6 +160,9 @@
               <p>Próximamente</p>
             </article>
           </div>
+          <button class="menu-exit-button" type="button" data-exit-reset>
+            Salir
+          </button>
         </section>
       </section>
     </main>
