@@ -12,6 +12,7 @@
     <script src="../js/navigation.js" defer></script>
     <script src="../js/addition.js" defer></script>
     <script src="../js/arithmetic.js" defer></script>
+    <script src="../js/addition-example.js" defer></script>
   </head>
   <body class="addition-page">
     <main class="arithmetic-shell">
@@ -39,7 +40,20 @@
           <article class="arithmetic-example" aria-labelledby="example-title">
             <h3 id="example-title">Un ejemplo paso a paso</h3>
             <p>Tienes 5 manzanas y recibes 3 más. ¿Cuántas tienes ahora?</p>
-            <ol><li>Empieza con las 5 manzanas que tenías.</li><li>Agrega las 3 nuevas: cuenta 6, 7 y 8.</li><li>El total es 8. Por eso, 5 + 3 = 8.</li></ol>
+            <div class="apple-example" data-apple-example>
+              <div class="apple-example-groups" aria-hidden="true">
+                <div class="apple-group"><span class="apple-group-label">Ya tienes</span><div class="apple-row" data-initial-apples></div><strong>5 manzanas</strong></div>
+                <span class="apple-plus">+</span>
+                <div class="apple-group apple-group-new"><span class="apple-group-label">Recibes</span><div class="apple-row" data-new-apples></div><strong>3 manzanas más</strong></div>
+              </div>
+              <p class="apple-instruction" data-apple-instruction aria-live="polite" aria-atomic="true">Empieza con 5 manzanas. Añade las nuevas una por una.</p>
+              <p class="apple-equation" data-apple-equation aria-label="Total actual: 5 manzanas">5 + 0 = 5</p>
+              <div class="arithmetic-actions">
+                <button type="button" data-apple-next>Añadir una manzana</button>
+                <button type="button" class="arithmetic-secondary" data-apple-reset>Volver a empezar</button>
+              </div>
+            </div>
+            <noscript><p>Cuenta las 5 manzanas iniciales. Agrega 3 más: 6, 7 y 8. El total es 8: 5 + 3 = 8.</p></noscript>
           </article>
           <div class="addition-practice-card">
             <div><h3>¿Listo para tu aventura?</h3><p>Resuelve 10 ejercicios. ¡Con 8 respuestas correctas alcanzas la meta!</p></div>
