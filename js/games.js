@@ -42,10 +42,11 @@
     const message = find("game-message");
     const mati = find("game-mati");
     let game, buttons = [], active = false;
-    const say = (text, pose = "encouraging") => {
+    const say = (text, pose = "encouraging", speak = false) => {
       message.textContent = text;
       mati.src = `../assets/images/mati-${pose}.png`;
       mati.alt = pose === "congratulating" ? "Mati celebra tu logro" : "Mati te acompaña en el juego";
+      if (speak) window.MatiAudio?.say(message, { delay: 350 });
     };
     const update = () => { find("memory-status").textContent = `${game.matches} de 6 parejas · ${game.attempts} intentos`; };
     function award(key, score) {
@@ -59,6 +60,7 @@
       } catch { return 0; }
     }
     const startMemory = () => {
+      window.MatiAudio?.stopSpeaking();
       active = true;
       hub.hidden = true;
       memory.hidden = false;
@@ -78,19 +80,26 @@
           button.setAttribute("aria-label",card.text);
           button.classList.add("is-revealed");
           if (result.type === "miss") {
-            say("Estas cartas no forman pareja. Resuelve la operación y recuerda dónde está cada resultado.","thinking");
+            window.MatiAudio?.play("wrong");
+            say("Estas cartas no forman pareja. Resuelve la operación y recuerda dónde está cada resultado.","thinking",true);
             find("memory-continue").hidden = false;
             find("memory-continue").focus();
           } else if (result.type === "match" || result.type === "complete") {
             result.indices.forEach(i => { buttons[i].disabled = true; buttons[i].classList.add("is-matched"); });
-            say("¡Muy bien! La operación y su resultado forman una pareja.","congratulating");
+            // A disabled button keeps keyboard focus but ignores Enter and Space, so move on to the next open card.
+            buttons.find(item => !item.disabled)?.focus();
+            window.MatiAudio?.play(result.type === "complete" ? "celebrate" : "match");
+            say("¡Muy bien! La operación y su resultado forman una pareja.","congratulating",true);
             if (result.type === "complete") {
               active = false;
               const gained = award("aventuraMatematicagame-memoryBest",60);
-              say(`¡Encontraste las 6 parejas! Ganaste ${gained} puntos nuevos. Puedes jugar de nuevo para practicar.`,"congratulating");
+              say(`¡Encontraste las 6 parejas! Ganaste ${gained} puntos nuevos. Puedes jugar de nuevo para practicar.`,"congratulating",true);
               find("memory-restart").focus();
             }
-          } else say("Ahora busca la carta que forma pareja con esta.");
+          } else {
+            window.MatiAudio?.play("flip");
+            say("Ahora busca la carta que forma pareja con esta.");
+          }
           update();
         });
         board.append(button);
@@ -103,6 +112,7 @@
     find("memory-start").addEventListener("click",startMemory);
     find("memory-restart").addEventListener("click",startMemory);
     find("memory-continue").addEventListener("click", () => {
+      window.MatiAudio?.stopSpeaking();
       const indices = game.clearMiss();
       indices.forEach(i => { buttons[i].textContent = "?"; buttons[i].classList.remove("is-revealed"); buttons[i].setAttribute("aria-label",`Carta ${i + 1}, oculta`); });
       find("memory-continue").hidden = true;
@@ -110,7 +120,7 @@
       buttons.find(button => !button.disabled)?.focus();
     });
     const dialog = find("games-leave-dialog");
-    const leave = () => { active = false; memory.hidden = true; hub.hidden = false; dialog.close(); find("memory-start").focus(); };
+    const leave = () => { window.MatiAudio?.stopSpeaking(); active = false; memory.hidden = true; hub.hidden = false; dialog.close(); find("memory-start").focus(); };
     find("games-back").addEventListener("click", () => { if (active) dialog.showModal(); else leave(); });
     find("games-stay").addEventListener("click", () => dialog.close());
     find("games-leave-confirm").addEventListener("click",leave);

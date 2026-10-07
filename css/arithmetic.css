@@ -12,7 +12,7 @@
 .arithmetic-mati-dialogue { display: grid; grid-template-columns: 220px minmax(0, 1fr); align-items: center; gap: 28px; margin: 24px 0; }
 .arithmetic-speech-bubble { position: relative; padding: 22px 26px; background: var(--light-blue); border: 2px solid #c5e5e7; border-radius: 24px; }
 .arithmetic-speech-bubble::before { content: ""; position: absolute; left: -13px; top: calc(50% - 12px); width: 24px; height: 24px; background: var(--light-blue); border-left: 2px solid #c5e5e7; border-bottom: 2px solid #c5e5e7; transform: rotate(45deg); }
-.arithmetic-speaker { font-family: "Fredoka", sans-serif; font-size: 1.4rem; color: var(--turquoise); }
+.arithmetic-speaker { font-family: "Fredoka", sans-serif; font-size: 1.4rem; color: var(--action-turquoise); }
 .arithmetic-speech-bubble .arithmetic-feedback { margin: 8px 0 0; padding: 0; min-height: 0; background: transparent; font-weight: 700; }
 .arithmetic-speech-bubble .arithmetic-feedback[data-correct="false"] { background: transparent; }
 @media (max-width: 600px) {
@@ -113,7 +113,7 @@
 .addition-score { background: #fff4cb; padding: 10px 16px; border-radius: 12px; }
 .addition-heading { display: flex; align-items: center; gap: 18px; margin: 28px 0; }
 .addition-page .addition-heading h1 { margin: 4px 0 0; font-size: clamp(1.8rem, 5vw, 2.7rem); }
-.addition-page .addition-eyebrow { margin: 0; color: var(--turquoise); font-size: .85rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.addition-page .addition-eyebrow { margin: 0; color: var(--action-turquoise); font-size: .85rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .addition-icon { flex: 0 0 80px; width: 80px; height: 80px; border-radius: 50%; background: url("../assets/images/operation-icons.png") -401px -81px / 1000px 375px no-repeat; }
 .subtraction-page .addition-icon { background-position: -530px -81px; }
 .multiplication-page .addition-icon { background-position: -401px -202px; }
@@ -153,3 +153,20 @@
   .multiplication-page .addition-icon { background-position: -321px -162px; }
   .division-page .addition-icon { background-position: -424px -162px; }
 }
+
+/* Tu desempeño: operación dominada y operación pendiente de refuerzo (OA4) */
+.performance-summary { margin: 24px 0; }
+.performance-summary h3 { margin: 0 0 12px; font-family: "Fredoka", sans-serif; }
+.performance-cards { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 14px; }
+.performance-card { padding: 18px; border: 2px solid transparent; border-radius: 18px; }
+.performance-card h4 { margin: 0 0 8px; font: 700 1.2rem "Fredoka", sans-serif; }
+.arithmetic-panel .performance-card p { margin: 0; }
+.performance-mastered { background: #e3f6ec; border-color: #9bd8bc; }
+.performance-reinforce { background: #fff5d7; border-color: #f3dfa0; }
+.performance-reinforce .review-links { margin-top: 12px; }
+
+/* La evaluación final y el número escondido usan los elementos de recompensa del proyecto. */
+.final-page .addition-icon,
+.missing-page .addition-icon { background: #fff4cb url("../assets/images/reward-icons.png") no-repeat; }
+.final-page .addition-icon { background-size: 395% auto; background-position: 81.8% 56.4%; }
+.missing-page .addition-icon { background-size: 471% auto; background-position: 49.2% 44.1%; }

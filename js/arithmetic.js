@@ -1,4 +1,4 @@
-/* Shared behavior for the four OA2 activities. Each page supplies its lesson data. */
+/* Shared behavior for the arithmetic practice, the final assessment and the missing-number game. Each page supplies its lesson data. */
 (() => {
   "use strict";
   const lesson = window.ArithmeticLesson;
@@ -57,6 +57,7 @@
       find("counter").focus();
     };
     const start = () => {
+      window.MatiAudio?.stopSpeaking();
       questions = [...lesson.exercises];
       for (let i = questions.length - 1; i > 0; i -= 1) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -82,12 +83,16 @@
       if (isCorrect) correct += 1;
       responses.push({ question, answer: Number(input.value), isCorrect });
       if (lesson.deferFeedback) {
+        // The final assessment must not reveal whether an answer was right, so its sound is neutral.
+        window.MatiAudio?.play("tap");
         feedback.textContent = "¡Respuesta guardada! Sigue con el próximo ejercicio. Al final revisaremos tus resultados juntos.";
       } else {
+        window.MatiAudio?.play(isCorrect ? "correct" : "wrong");
         feedback.dataset.correct = String(isCorrect);
         feedback.textContent = `${isCorrect ? "¡Muy bien!" : "Sigamos aprendiendo."} ${question.explanation}`;
         window.ArithmeticVisuals?.render(find("quantity-visual"), question.operation || lesson.id, question, true);
         pose(isCorrect ? "congratulating" : "thinking", isCorrect ? "Mati felicita tu respuesta" : "Mati te ayuda a pensar");
+        window.MatiAudio?.say(feedback, { delay: 500 });
       }
       input.disabled = true;
       submit.disabled = true;
@@ -99,6 +104,7 @@
     });
     next.addEventListener("click", () => {
       if (!answered) return;
+      window.MatiAudio?.stopSpeaking();
       if (index < total - 1) { index += 1; render(); return; }
       const best = Math.min(total, read(bestKey));
       const gained = Math.max(0, correct - best) * 10;
@@ -118,7 +124,9 @@
         resultMati.alt = correct >= passingCorrect ? "Mati celebra que alcanzaste la meta" : "Mati te anima a seguir practicando";
       }
       window.ArithmeticRecommendations?.render(find("review-topics"), find("review-links"), responses, lesson.id);
+      window.MatiAudio?.play(correct >= passingCorrect ? "celebrate" : "encourage");
       if (lesson.deferFeedback) {
+        window.ArithmeticRecommendations?.renderPerformance(find("performance"), responses);
         for (const operation of ["addition", "subtraction", "multiplication", "division"]) {
           const attempts = responses.filter(response => response.question.operation === operation);
           const hits = attempts.filter(response => response.isCorrect).length;
@@ -131,10 +139,11 @@
       window.AventuraMatematicaNavigation?.renderStoredPoints();
       show(results);
       find("result-title").focus();
+      window.MatiAudio?.say(find("result-message"), { delay: 900 });
     });
     find("start").addEventListener("click", start);
     find("retry").addEventListener("click", start);
-    find("review").addEventListener("click", () => { show(intro); find("lesson-title").focus(); });
+    find("review").addEventListener("click", () => { window.MatiAudio?.stopSpeaking(); show(intro); find("lesson-title").focus(); });
     const dialog = find("leave-dialog");
     find("leave").addEventListener("click", () => {
       find("leave-confirm").href = lesson.id === "game-missing" ? "games.html" : "menu.html";

@@ -894,7 +894,7 @@ a {
 
 .menu-brand {
   margin: 0;
-  color: var(--turquoise);
+  color: var(--action-turquoise);
   font-family: "Fredoka", "Trebuchet MS", Arial, sans-serif;
   font-size: clamp(1.05rem, 2.5vw, 1.35rem);
   font-weight: 700;
@@ -1283,7 +1283,7 @@ a {
 .challenge-label {
   width: max-content;
   padding: 7px 14px;
-  color: var(--white);
+  color: var(--dark-blue);
   font-family: "Fredoka", "Trebuchet MS", Arial, sans-serif;
   font-size: 1rem;
   font-weight: 700;
@@ -1638,7 +1638,7 @@ a.future-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 
 .identify-brand,
 .identify-label {
   margin: 0;
-  color: var(--turquoise);
+  color: var(--action-turquoise);
   font-family: "Fredoka", "Trebuchet MS", Arial, sans-serif;
   font-weight: 700;
 }
@@ -1651,7 +1651,7 @@ a.future-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 
   justify-self: center;
   width: max-content;
   padding: 7px 15px;
-  color: var(--white);
+  color: var(--dark-blue);
   font-size: 1rem;
   background: var(--orange);
   border-radius: 999px;
@@ -1780,7 +1780,7 @@ a.future-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 
 
 .identify-add span,
 .identify-option.identify-add {
-  background: var(--turquoise);
+  background: var(--action-turquoise);
 }
 
 .identify-subtract span,
@@ -2420,4 +2420,160 @@ dialog.identify-menu-modal:not([open]) { display: none; }
     animation: none !important;
     transform: none !important;
   }
+}
+
+/* Audio: botón de sonido y lectura en voz alta */
+.sound-toggle,
+.sound-listen {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 44px;
+  padding: 8px 16px;
+  color: var(--dark-blue);
+  font: 800 1rem "Nunito", "Trebuchet MS", Arial, sans-serif;
+  background: var(--white);
+  border: 2px solid var(--action-turquoise);
+  border-radius: 14px;
+  box-shadow: none;
+  cursor: pointer;
+}
+
+.sound-listen {
+  min-height: 40px;
+  margin-top: 10px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+}
+
+.sound-toggle[aria-pressed="false"] {
+  background: #eef2f5;
+  border-style: dashed;
+}
+
+.sound-toggle:hover,
+.sound-listen:hover {
+  background: var(--light-blue);
+}
+
+.sound-toggle:focus-visible,
+.sound-listen:focus-visible {
+  outline: 3px solid var(--orange);
+  outline-offset: 3px;
+}
+
+.sound-controls {
+  display: inline-flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+}
+
+.sound-controls-floating {
+  position: fixed;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
+}
+
+.sound-music {
+  min-width: 44px;
+  padding: 8px 10px;
+}
+
+.sound-toggle:disabled {
+  opacity: 0.5;
+  cursor: default;
+}
+
+.sound-listen[hidden],
+html[data-sound="off"] .sound-listen {
+  display: none;
+}
+
+/* Los botones de las prácticas heredan estilos de acción; el audio usa siempre el estilo secundario. */
+.arithmetic-panel .sound-toggle,
+.arithmetic-panel .sound-listen {
+  display: inline-flex;
+  padding: 8px 16px;
+  color: var(--dark-blue);
+  font: 800 1rem "Nunito", "Trebuchet MS", Arial, sans-serif;
+  background: var(--white);
+  border: 2px solid var(--action-turquoise);
+  border-radius: 14px;
+  box-shadow: none;
+}
+
+.arithmetic-panel .sound-listen {
+  padding: 6px 14px;
+  font-size: 0.95rem;
+}
+
+.arithmetic-panel .sound-toggle[aria-pressed="false"] {
+  background: #eef2f5;
+  border-style: dashed;
+}
+
+.arithmetic-panel .sound-toggle:hover:not(:disabled),
+.arithmetic-panel .sound-listen:hover:not(:disabled) {
+  color: var(--dark-blue);
+  background: var(--light-blue);
+}
+
+/* El botón de sonido comparte la barra superior sin desplazar los controles originales. */
+@media (min-width: 701px) {
+  .menu-top-actions {
+    flex-direction: column;
+    align-items: flex-end;
+  }
+}
+
+@media (min-width: 761px) {
+  .identify-topbar .identify-brand {
+    margin-right: auto;
+  }
+}
+
+.sound-icon {
+  display: inline-flex;
+}
+
+.sound-icon svg {
+  width: 20px;
+  height: 20px;
+}
+
+/* En tablets el título no debe rozar los botones de la esquina superior derecha. */
+@media (min-width: 701px) and (max-width: 1100px) {
+  .menu-instruction {
+    max-width: calc(100% - 300px);
+    margin-inline: auto;
+  }
+}
+
+/* Los controles de música usan solo el ícono, incluso dentro de las páginas de práctica. */
+.arithmetic-panel .sound-music {
+  min-width: 44px;
+  padding: 8px 10px;
+}
+
+/* Mati "habla": se mueve suavemente y la oración que se lee se resalta. */
+.is-talking {
+  animation: mati-talk 0.5s ease-in-out infinite alternate;
+  transform-origin: 50% 100%;
+}
+
+@keyframes mati-talk {
+  from { transform: translateY(0) rotate(-1deg); }
+  to { transform: translateY(-6px) rotate(1deg) scale(1.02); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .is-talking { animation: none; }
+}
+
+::highlight(mati-speaking) {
+  color: var(--dark-blue);
+  background-color: #ffe08a;
 }

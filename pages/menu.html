@@ -15,6 +15,7 @@
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="../css/styles.css" />
     <script src="../js/navigation.js" defer></script>
+    <script src="../js/audio.js" defer></script>
     <script src="../js/menu-progress.js" defer></script>
   </head>
 
@@ -84,7 +85,7 @@
               alt="Mati, el explorador matemático"
             />
           </div>
-          <div class="menu-speech">
+          <div class="menu-speech" data-speak data-speak-mode="append">
             <p>¡Excelente! Ya estás listo para practicar.</p>
             <p>Selecciona una actividad.</p>
           </div>
@@ -93,7 +94,7 @@
         <section class="menu-modules" aria-labelledby="modules-title">
           <h2 id="modules-title">Operaciones básicas</h2>
           <div class="module-grid">
-            <a class="module-card module-add" href="addition.html" aria-label="Practicar suma">
+            <a class="module-card module-add" href="addition.html">
               <span class="module-symbol" aria-hidden="true">+</span>
               <span class="module-copy">
                 <strong>Sumar</strong>
@@ -102,7 +103,7 @@
               </span>
             </a>
 
-            <a class="module-card module-subtract" href="subtraction.html" aria-label="Practicar resta">
+            <a class="module-card module-subtract" href="subtraction.html">
               <span class="module-symbol" aria-hidden="true">−</span>
               <span class="module-copy">
                 <strong>Restar</strong>
@@ -111,11 +112,7 @@
               </span>
             </a>
 
-            <a
-              class="module-card module-multiply"
-              href="multiplication.html"
-              aria-label="Practicar multiplicación"
-            >
+            <a class="module-card module-multiply" href="multiplication.html">
               <span class="module-symbol" aria-hidden="true">×</span>
               <span class="module-copy">
                 <strong>Multiplicar</strong>
@@ -124,7 +121,7 @@
               </span>
             </a>
 
-            <a class="module-card module-divide" href="division.html" aria-label="Practicar división">
+            <a class="module-card module-divide" href="division.html">
               <span class="module-symbol" aria-hidden="true">÷</span>
               <span class="module-copy">
                 <strong>Dividir</strong>
@@ -136,11 +133,7 @@
         </section>
 
         <section class="challenge-section" aria-labelledby="challenge-title">
-          <a
-            class="challenge-card"
-            href="identify-operation.html"
-            aria-label="Reto de Mati: Identifica la operación"
-          >
+          <a class="challenge-card" href="identify-operation.html">
             <span class="challenge-label">Reto de Mati</span>
             <span class="challenge-content">
               <span>

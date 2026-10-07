@@ -11,6 +11,9 @@ function challenge() {
     click() {(this.handlers.click || []).forEach(fn=>fn({target:this}));},showModal() {this.open=true;},close() {this.open=false;},
   });
   const node = selector => {if(!nodes.has(selector))nodes.set(selector,element());return nodes.get(selector);};
+  const progressTrack = element(); progressTrack.attributes = {};
+  progressTrack.setAttribute = (name,value) => {progressTrack.attributes[name] = value;};
+  node('[data-progress-bar]').parentElement = progressTrack;
   const options = ['suma','resta','multiplicación','división'].map(operation => {const button=element();button.dataset.operation=operation;return button;});
   const images = [element(),element(),element()];
   const context = vm.createContext({ Math:Object.assign(Object.create(Math),{random:()=>.999}),
@@ -27,7 +30,7 @@ function challenge() {
       node('[data-next-question]').click();
     });
   };
-  return {node,finish,saved};
+  return {node,finish,saved,options,progressTrack};
 }
 test('OA1 measures the 80 percent goal and awards only improvements',()=>{
   const app=challenge();
@@ -51,4 +54,15 @@ test('OA1 native exit dialog opens and cancellation preserves the attempt',()=>{
   app.node('[data-menu-warning-cancel]').click();
   assert.equal(app.node('[data-menu-warning-modal]').open,false);
   assert.equal(app.node('[data-identify-quiz]').hidden,false);
+});
+test('OA1 progress bar tells assistive technology how many questions were answered',()=>{
+  const app=challenge();
+  app.node('[data-start-challenge]').click();
+  assert.equal(app.progressTrack.attributes['aria-valuenow'],'0');
+  app.options[0].click();
+  assert.equal(app.progressTrack.attributes['aria-valuenow'],'1');
+  app.node('[data-next-question]').click();
+  assert.equal(app.progressTrack.attributes['aria-valuenow'],'1');
+  app.options[0].click();
+  assert.equal(app.progressTrack.attributes['aria-valuenow'],'2');
 });

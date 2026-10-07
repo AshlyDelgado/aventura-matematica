@@ -260,6 +260,7 @@
     elements.counter.textContent = `Pregunta ${questionNumber} de ${TOTAL_QUESTIONS}`;
     elements.attemptPoints.textContent = correctAnswers * POINTS_PER_CORRECT;
     elements.progressBar.style.width = `${((questionNumber - 1) / TOTAL_QUESTIONS) * 100}%`;
+    elements.progressBar.parentElement.setAttribute("aria-valuenow", String(questionNumber - 1));
     elements.statement.textContent = question.statement;
     elements.feedback.textContent = "";
     elements.nextButton.disabled = true;
@@ -273,6 +274,7 @@
   }
 
   function startAttempt() {
+    window.MatiAudio?.stopSpeaking();
     responses = [];
     currentQuestions = shuffleQuestions(questions);
     currentIndex = 0;
@@ -296,6 +298,8 @@
     option.classList.add("is-selected", isCorrect ? "is-correct" : "is-incorrect");
     option.setAttribute("aria-pressed", "true");
 
+    window.MatiAudio?.play(isCorrect ? "correct" : "wrong");
+
     if (isCorrect) {
       correctAnswers += 1;
       elements.feedback.textContent = `¡Muy bien! Elegiste la operación correcta. ${question.explanation}`;
@@ -306,17 +310,22 @@
       setMatiPose("thinking");
     }
 
+    window.MatiAudio?.say(elements.feedback, { delay: 500 });
+
     elements.options.forEach((button) => {
       button.disabled = true;
     });
 
     elements.attemptPoints.textContent = correctAnswers * POINTS_PER_CORRECT;
     elements.progressBar.style.width = `${((currentIndex + 1) / TOTAL_QUESTIONS) * 100}%`;
+    elements.progressBar.parentElement.setAttribute("aria-valuenow", String(currentIndex + 1));
     elements.nextButton.disabled = false;
     elements.nextButton.focus();
   }
 
   function goToNextQuestion() {
+    window.MatiAudio?.stopSpeaking();
+
     if (currentIndex < TOTAL_QUESTIONS - 1) {
       currentIndex += 1;
       renderQuestion();
@@ -373,6 +382,7 @@
       : "Revisa las pistas e inténtalo nuevamente. Cada intento te ayuda a aprender.";
     elements.resultBadge.classList.toggle("is-earned", reachedGoal);
     setMatiPose(reachedGoal ? "resultCelebration" : "encouraging");
+    window.MatiAudio?.play(reachedGoal ? "celebrate" : "encourage");
 
     window.ArithmeticRecommendations?.render(
       document.querySelector("[data-review-topics]"), document.querySelector("[data-review-links]"), responses
@@ -383,6 +393,8 @@
     window.requestAnimationFrame(() => {
       elements.resultTitle.focus();
     });
+
+    window.MatiAudio?.say(elements.resultMessage, { delay: 900 });
   }
 
   function cacheElements() {

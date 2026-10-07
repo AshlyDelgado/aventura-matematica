@@ -16,6 +16,7 @@
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/arithmetic.css" />
     <script src="../js/navigation.js" defer></script>
+    <script src="../js/audio.js" defer></script>
     <script src="../js/recommendations.js" defer></script>
     <script src="../js/identify-operation.js" defer></script>
   </head>
@@ -86,7 +87,7 @@
             <p>Puntaje del reto: <strong data-attempt-points>0</strong></p>
           </div>
 
-          <div class="identify-progress" aria-label="Progreso del reto">
+          <div class="identify-progress" role="progressbar" aria-label="Progreso del reto" aria-valuemin="0" aria-valuemax="10" aria-valuenow="0">
             <span data-progress-bar></span>
           </div>
 
@@ -104,7 +105,7 @@
 
             <article class="identify-question-card">
               <h2 id="identify-question-title" tabindex="-1">Situación</h2>
-              <p data-question-statement></p>
+              <p data-question-statement data-speak></p>
             </article>
           </div>
 
@@ -127,7 +128,7 @@
             </button>
           </div>
 
-          <p class="identify-feedback" data-feedback aria-live="polite"></p>
+          <p class="identify-feedback" data-feedback aria-live="polite" data-speak></p>
 
           <div class="identify-actions">
             <button class="identify-primary-button" type="button" data-next-question disabled>
@@ -176,7 +177,7 @@
           <div class="identify-result-badge" data-result-badge aria-hidden="true"></div>
           <h2 id="identify-results-title" tabindex="-1">Resultados del reto</h2>
           <p class="identify-result-status" data-result-status></p>
-          <p class="identify-mati-message" data-result-message></p>
+          <p class="identify-mati-message" data-result-message data-speak></p>
 
           <dl class="identify-result-grid">
             <div>

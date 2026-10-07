@@ -7,23 +7,25 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="icon" href="data:," />
     <link rel="stylesheet" href="../css/styles.css" />
     <link rel="stylesheet" href="../css/arithmetic.css" />
     <script src="../js/navigation.js" defer></script>
+    <script src="../js/audio.js" defer></script>
     <script src="../js/games.js" defer></script>
   </head>
   <body class="addition-page">
     <main class="arithmetic-shell"><div class="arithmetic-panel">
       <header><nav class="arithmetic-topbar" aria-label="Navegación principal"><strong class="addition-brand">Aventura <span>Matemática</span></strong><a href="menu.html" data-games-menu>Menú</a><span class="addition-score">Puntaje: <strong data-points>0</strong></span></nav><h1>Juega con Mati</h1></header>
       <section data-games-hub aria-labelledby="games-title">
-        <div class="addition-welcome"><div class="addition-welcome-copy"><p class="addition-eyebrow">Aprende jugando</p><h2 id="games-title">¡Elige tu juego!</h2><p>Practica las cuatro operaciones a tu ritmo. No hay límite de tiempo.</p></div><div class="addition-fox"><img src="../assets/images/mati.png" alt="Mati te invita a jugar" /></div></div>
+        <div class="addition-welcome"><div class="addition-welcome-copy" data-speak data-speak-mode="append"><p class="addition-eyebrow">Aprende jugando</p><h2 id="games-title">¡Elige tu juego!</h2><p>Practica las cuatro operaciones a tu ritmo. No hay límite de tiempo.</p></div><div class="addition-fox"><img src="../assets/images/mati.png" alt="Mati te invita a jugar" /></div></div>
         <div class="addition-practice-card"><div><h3>Parejas matemáticas</h3><p>Encuentra las 6 parejas de operación y resultado. Completar el juego suma hasta 60 puntos una sola vez.</p></div><button type="button" data-memory-start>Jugar a las parejas</button></div>
         <div class="addition-practice-card"><div><h3>El número escondido</h3><p>Encuentra el número que falta en 12 operaciones. ¡Mati te ayuda a resolver el misterio!</p></div><a class="arithmetic-button" href="missing-number.html">Buscar los números</a></div>
       </section>
       <section data-memory aria-labelledby="memory-title" hidden>
         <h2 id="memory-title">Parejas matemáticas</h2><p data-memory-status></p>
         <div class="memory-board" data-memory-board role="group" aria-label="Cartas de operaciones y resultados"></div>
-        <section class="arithmetic-mati-dialogue" aria-label="Mati te acompaña"><img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te acompaña en el juego" data-game-mati /><div class="arithmetic-speech-bubble"><span class="arithmetic-speaker">Mati</span><p class="arithmetic-feedback" data-game-message aria-live="polite" aria-atomic="true"></p></div></section>
+        <section class="arithmetic-mati-dialogue" aria-label="Mati te acompaña"><img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te acompaña en el juego" data-game-mati /><div class="arithmetic-speech-bubble"><span class="arithmetic-speaker">Mati</span><p class="arithmetic-feedback" data-game-message aria-live="polite" aria-atomic="true" data-speak></p></div></section>
         <div class="arithmetic-actions"><button type="button" data-memory-continue hidden>Seguir buscando</button><button type="button" class="arithmetic-secondary" data-memory-restart>Empezar de nuevo</button><button type="button" class="arithmetic-secondary" data-games-back>Elegir otro juego</button></div>
       </section>
       <dialog data-games-leave-dialog aria-labelledby="games-leave-title" aria-describedby="games-leave-description"><h2 id="games-leave-title">¿Salir del juego?</h2><p id="games-leave-description">Perderás este intento. Los puntos de juegos terminados se conservan.</p><div class="arithmetic-actions"><button type="button" autofocus data-games-stay>Seguir jugando</button><button type="button" class="arithmetic-secondary" data-games-leave-confirm>Salir del juego</button><a href="menu.html" data-games-menu-confirm hidden>Volver al menú</a></div></dialog>
