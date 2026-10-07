@@ -4,7 +4,7 @@ Fecha: 7 de octubre de 2026.
 
 ## Pruebas de lógica
 
-Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 33 pruebas cubren:
+Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 52 pruebas cubren:
 
 - Respuestas y cantidades de los cuarenta ejercicios de las cuatro operaciones, antes y después de responder.
 - Meta del 80 %, reintentos sin duplicar puntos y puntos por mejora.
@@ -16,7 +16,9 @@ Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 33 pruebas cubren:
 - Número escondido: soluciones matemáticas, meta de diez aciertos de doce y puntajes.
 - Juego de parejas: coincidencias, errores, continuación explícita y finalización.
 - Foco en el enunciado al comenzar un ejercicio y en el mensaje de Mati al responder.
-- OA1: meta del 80 %, puntajes por mejora y cancelación del diálogo de salida.
+- OA1: meta del 80 %, puntajes por mejora, cancelación del diálogo de salida y avance de la barra de progreso para tecnologías de apoyo.
+- OA4: la operación dominada y la pendiente de refuerzo de la evaluación final (diferencias, empates, resultado perfecto, parejo o inferior al 80 %, y sin respuestas).
+- Audio: efectos que se programan y se silencian; preferencias de sonido y música guardadas (incluso con almacenamiento bloqueado); conversión de símbolos a palabras; división en oraciones con su posición en el texto (incluido el signo de interrogación de las operaciones del número escondido, con sus 12 ejercicios reales); elección de la voz en español más natural; entonación de preguntas y exclamaciones; lectura automática con pausa y cancelación; música programada por compases, en bucle y que se apaga con el sonido; bajada de volumen mientras Mati habla; y continuidad de la melodía al cambiar de página.
 
 ## Pruebas en Chrome real
 
@@ -53,3 +55,36 @@ Mejoras de interfaz implementadas y verificadas:
 - Las instrucciones presentan cantidad de ejercicios, meta y puntaje en bloques cortos; en pantallas de hasta 360 píxeles se apilan para conservar la legibilidad.
 - Mati acompaña los resultados con felicitaciones o ánimo. Los enlaces de repaso consideran los errores de cada operación y priorizan su proporción; se ocultan cuando no hay errores. Las pruebas cubren las lecciones, identificación, número escondido y eliminación de recomendaciones de un intento anterior.
 - Se repitieron los recorridos completos en Chrome y la revisión de anchos de 320, 390, 768 y 1280 píxeles sin errores de JavaScript ni desbordamientos detectados.
+
+## Revisión de audio y OA4 del 7 de octubre de 2026
+
+Se agregaron efectos de sonido, lectura en voz alta con botón **Escuchar**, botón **Sonido** para silenciar y el reconocimiento de la operación dominada y la pendiente de refuerzo en la evaluación final. También se reemplazó el ícono de suma en la evaluación final y en el número escondido, se agregó el ícono de sitio vacío a las páginas de práctica y se eliminaron dos hojas de estilo vacías y sin uso.
+
+Se ejecutó un recorrido automatizado en Chrome real (perfil temporal y servidor HTTP local) con 116 comprobaciones, todas aprobadas en dos corridas seguidas, y sin excepciones ni errores de consola:
+
+- Las diez páginas sin desbordamiento horizontal en 320, 390, 768 y 1280 píxeles, y botón de sonido visible y de tamaño táctil en las diez.
+- Recorridos completos de las cuatro operaciones, el número escondido, la evaluación final y las parejas, con puntajes, metas del 80 %, reintentos sin duplicar puntos y reinicio al salir.
+- Audio: `AudioContext` y `speechSynthesis` se instrumentaron para contar las notas emitidas y los textos narrados. Se comprobó que cada respuesta suena (acierto de 3 notas, error de 2, celebración de 4), que la evaluación final usa un sonido neutro de 1 nota sin revelar el resultado, que "Escuchar" narra el enunciado en español y se detiene con un segundo clic, que el número escondido lee la expresión como "un número escondido", que silenciar elimina los sonidos y oculta "Escuchar", y que la preferencia persiste al recargar.
+- Voz y música: Mati comenta sola las respuestas incorrectas y los resultados (no en la evaluación final ni con el sonido apagado), oración por oración y con la entonación correcta. Mientras habla, su imagen se anima y la oración que se lee se resalta en el texto, y ambos efectos se quitan al terminar o al pasar al siguiente ejercicio. Sin interacción la música no arranca ni crea audio; con un clic real del mouse arranca, el audio queda activo y sigue programando compases. La música baja mientras Mati habla y vuelve después. Los botones de música y de sonido la apagan y la reactivan, recuerdan la elección y, al cambiar de página, la melodía continúa cerca de donde iba.
+- OA4: con 5, 4, 3 y 2 aciertos por operación, la pantalla muestra "Suma: 5 de 5" como dominada y "División: 2 de 5" como pendiente, con enlace de repaso.
+- Diseño: en el menú (720, 768, 900, 1024 y 1280 píxeles) los botones de la esquina no tapan el título, la marca ni el puntaje; se ajustó el título en tabletas porque rozaba el botón Inicio. En Identifica la operación, Inicio y Sonido quedan juntos a la derecha desde 761 píxeles.
+
+Se hizo además una búsqueda de errores en las pantallas activas (práctica, comentarios de Mati, resultados, parejas e Identifica la operación) en 320 y 390 píxeles: sin desbordamientos ni errores de consola. Se encontró y corrigió un problema de teclado en las parejas: al emparejar, el foco quedaba en una carta ya deshabilitada y Enter o Espacio dejaban de responder; ahora el foco pasa a la siguiente carta disponible. También se optimizó el ícono de recompensa (de 338 KB a 38 KB, sin cambio visible).
+
+En esta revisión la prueba en Chrome detectó un error propio de la lectura por oraciones: el signo de interrogación de operaciones como `? × 2 = 10` se tomaba como fin de oración y la voz leía "× 2 es igual a 10". Se corrigió tratándolo como marcador y se agregaron pruebas con las 12 operaciones reales.
+
+Límites: la verificación comprueba que los sonidos, la música y las narraciones se emiten, no cómo se escuchan ni a qué volumen. No se probó el audio audible ni las voces reales en celulares ni en otros navegadores, y no se hizo una revisión con lector de pantalla. El recurso no incluye video.
+
+## Auditoría de accesibilidad y legibilidad del 7 de octubre de 2026
+
+Se auditaron con axe-core (reglas WCAG 2.0, 2.1 y 2.2 niveles A y AA, más buenas prácticas) las diez páginas en 390 y 1280 píxeles y nueve estados activos: pregunta y comentario de Mati, resultados de suma, resultados de la evaluación final con "Tu desempeño", tablero de parejas, y pregunta, comentario y resultados de Identifica la operación. Como axe no puede calcular el contraste sobre fondos con degradado, se midió además el contraste real de 456 textos a partir de capturas de pantalla con el texto oculto.
+
+Se corrigieron cinco problemas:
+
+- Texto blanco sobre naranja en las insignias "Reto de Mati" (2,45:1): ahora es azul oscuro (5,3:1).
+- Etiquetas pequeñas en turquesa sobre celeste (3,9:1) y la marca "Aventura Matemática" del menú e Identifica (4,0:1): ahora usan el turquesa de acción, de unos 5:1.
+- Texto blanco de la opción "Sumar" de Identifica (4,3:1): ahora usa el turquesa de acción.
+- La barra de progreso de Identifica no tenía rol ni valores: ahora anuncia cuántas preguntas se respondieron.
+- Las tarjetas del menú tenían un nombre accesible ("Practicar suma") distinto del texto visible ("Sumar…"): se quitó para que el nombre salga del contenido, que ya incluye el mejor resultado.
+
+Resultado: cero violaciones en las 29 pantallas y estados. Todos los textos cumplen 4,5:1 (3:1 en texto grande), salvo los de controles deshabilitados en ese momento (por ejemplo "Comprobar" después de responder), que el estándar exime. El recorrido completo de 116 comprobaciones se repitió en Chrome y en Microsoft Edge con los mismos resultados.
