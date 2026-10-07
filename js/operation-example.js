@@ -27,6 +27,9 @@
         message.textContent = step ? `Hay ${step} ${step === 1 ? "bolsa" : "bolsas"} con 3 canicas en cada una. Cuenta las canicas: ${step * 3}.` : "Vamos a juntar 4 bolsas con 3 canicas cada una.";
         equation.textContent = `${step} × 3 = ${step * 3}`;
       } else {
+        window.ArithmeticVisuals.render(example.querySelector("[data-example-pool]"), "game-missing", {
+          visualTotal: 12 - step * 3, visualLabel: `Fichas por repartir: ${12 - step * 3}`,
+        });
         window.ArithmeticVisuals.render(visuals, operation, { a: step * 3, b: 3 }, true);
         message.textContent = `De las 12 fichas, quedan ${12 - step * 3} por repartir. Cada persona tiene ${step}.`;
         equation.textContent = step === 4 ? "12 ÷ 3 = 4" : `Repartidas: ${step * 3} de 12`;

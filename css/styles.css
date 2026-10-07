@@ -1367,6 +1367,18 @@ a {
   font-size: 1.25rem;
 }
 
+a.future-card {
+  display: block;
+  opacity: 1;
+  text-decoration: none;
+  background: var(--white);
+  border: 3px solid rgb(0 137 123 / 24%);
+  transition: border-color 150ms ease, background-color 150ms ease;
+}
+
+a.future-card:hover { background: #f0fbf9; border-color: var(--turquoise); }
+a.future-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+
 .future-card p {
   margin: 0;
   color: #4d6277;

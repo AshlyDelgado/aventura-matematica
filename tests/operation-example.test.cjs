@@ -15,6 +15,7 @@ for (const operation of ['subtraction','multiplication','division']) {
     for (let step = 1; step <= 4; step += 1) {
       next.handlers.click();
       const q = renders.at(-1)[2];
+      if (operation === 'division') assert.equal(renders.at(-2)[2].visualTotal + q.a,12);
       assert.equal(operation === 'subtraction' ? q.b : operation === 'multiplication' ? q.a : q.a / q.b, step);
     }
     assert.equal(next.disabled,true);
