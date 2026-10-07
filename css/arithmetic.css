@@ -41,6 +41,10 @@
 .assessment-breakdown dt { font-weight: 800; }
 .assessment-breakdown dd { margin: 8px 0 0; }
 .assessment-review { white-space: pre-line; }
+.activity-facts { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; width: 100%; margin: 4px 0 12px; }
+.activity-facts div { padding: 14px 8px; border-radius: 14px; background: white; text-align: center; }
+.activity-facts dt { min-height: 2.5em; font-size: .85rem; font-weight: 700; line-height: 1.25; }
+.activity-facts dd { margin: 8px 0 0; color: var(--dark-blue); font: 700 clamp(1rem, 4vw, 1.5rem) "Nunito", sans-serif; }
 .memory-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .arithmetic-panel .memory-card { min-height: 100px; font-size: clamp(1.2rem, 4vw, 1.8rem); background: var(--light-blue); color: var(--dark-blue); }
 .arithmetic-panel .memory-card.is-revealed { background: #fff5d7; }
