@@ -4,7 +4,7 @@ Fecha: 7 de octubre de 2026.
 
 ## Pruebas de lógica
 
-Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 25 pruebas cubren:
+Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 28 pruebas cubren:
 
 - Respuestas y cantidades de los cuarenta ejercicios de las cuatro operaciones, antes y después de responder.
 - Meta del 80 %, reintentos sin duplicar puntos y puntos por mejora.
@@ -15,6 +15,8 @@ Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 25 pruebas cubren:
 - Evaluación final: cinco ejercicios por operación, corrección diferida, dieciséis aciertos de veinte y resultados por operación.
 - Número escondido: soluciones matemáticas, meta de diez aciertos de doce y puntajes.
 - Juego de parejas: coincidencias, errores, continuación explícita y finalización.
+- Foco en el enunciado al comenzar un ejercicio y en el mensaje de Mati al responder.
+- OA1: meta del 80 %, puntajes por mejora y cancelación del diálogo de salida.
 
 ## Pruebas en Chrome real
 
@@ -32,3 +34,21 @@ Se usó un perfil temporal de Chrome con un servidor HTTP local, separado del pe
 Esta verificación no sustituye pruebas en dispositivos físicos, otros navegadores ni una revisión completa con lector de pantalla. Las fuentes externas requieren conexión y tienen fuentes de respaldo.
 
 Antes de entregar, el equipo debe confirmar población meta, observaciones de avances anteriores, fecha de entrega y medio de acceso publicado. El documento Word externo no se modificó y aún debe actualizarse con esos datos.
+
+## Revisión de interfaz del 7 de octubre de 2026
+
+Se revisaron las diez páginas en Chrome con anchos de 320, 390, 768 y 1280 píxeles, además de las pantallas activas de los ejercicios. No se detectaron desbordamientos ni textos cortados en los controles, títulos y tarjetas inspeccionados.
+
+Se corrigieron tres problemas:
+
+- La práctica enfocaba automáticamente la respuesta, saltándose la lectura del enunciado y pudiendo abrir el teclado móvil. Ahora enfoca el encabezado del ejercicio; al responder, enfoca la explicación de Mati.
+- Las confirmaciones de salida del menú y del OA1 eran ventanas personalizadas que permitían alcanzar controles de fondo con el teclado. Ahora usan diálogos nativos. Se verificaron recorrido con Tab, cierre con Escape, cancelación y restauración del foco.
+- El texto blanco de las acciones turquesas tenía un contraste de aproximadamente 4,32:1. Se oscureció únicamente el color de esas acciones, conservando los recursos gráficos propios. La revisión de botones activos pasó el umbral correspondiente de 4,5:1 para texto normal de la [referencia del W3C](https://www.w3.org/WAI/WCAG21/Techniques/general/G18). También se corrigió el fondo oscuro de las cartas al pasar el cursor.
+
+Esta comprobación de contraste abarca los botones inspeccionados, no constituye una auditoría completa de conformidad de accesibilidad.
+
+Mejoras de interfaz que conviene considerar en una siguiente iteración:
+
+- Mostrar el mejor resultado por actividad en el menú, con una indicación clara de cuáles alcanzaron la meta.
+- Presentar las instrucciones de los retos en bloques cortos (cantidad de ejercicios, meta y puntaje) para reducir el desplazamiento en celular.
+- Dar más presencia a Mati en los resultados y ofrecer accesos directos a las operaciones que necesitan repaso.
