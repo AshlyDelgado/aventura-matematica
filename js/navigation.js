@@ -69,16 +69,19 @@ function setupExitReset() {
 
   function openExitModal() {
     exitModal.hidden = false;
+    exitModal.showModal();
     cancelButton.focus();
   }
 
   function closeExitModal() {
+    exitModal.close();
     exitModal.hidden = true;
     exitButton.focus();
   }
 
   exitButton.addEventListener("click", openExitModal);
   cancelButton.addEventListener("click", closeExitModal);
+  exitModal.addEventListener("cancel", (event) => { event.preventDefault(); closeExitModal(); });
   confirmButton.addEventListener("click", () => {
     resetStoredProgress();
     window.location.href = "../index.html";

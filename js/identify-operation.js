@@ -325,10 +325,12 @@
 
   function openMenuWarning() {
     elements.menuWarningModal.hidden = false;
+    elements.menuWarningModal.showModal();
     elements.menuWarningCancel.focus();
   }
 
   function closeMenuWarning() {
+    elements.menuWarningModal.close();
     elements.menuWarningModal.hidden = true;
     elements.menuWarningOpen.focus();
   }
@@ -424,6 +426,7 @@
     elements.nextButton.addEventListener("click", goToNextQuestion);
     elements.menuWarningOpen.addEventListener("click", openMenuWarning);
     elements.menuWarningCancel.addEventListener("click", closeMenuWarning);
+    elements.menuWarningModal.addEventListener("cancel", (event) => { event.preventDefault(); closeMenuWarning(); });
     elements.menuWarningModal.addEventListener("click", (event) => {
       if (event.target === elements.menuWarningModal) {
         closeMenuWarning();
