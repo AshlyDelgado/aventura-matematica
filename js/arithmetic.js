@@ -41,6 +41,7 @@
       find("progress").value = index;
       find("question").textContent = question.statement;
       find("expression").textContent = `${question.a} ${lesson.symbol} ${question.b} = ?`;
+      window.ArithmeticVisuals?.render(find("quantity-visual"), lesson.id, question);
       input.value = "";
       input.disabled = false;
       submit.disabled = false;
@@ -76,6 +77,7 @@
       if (isCorrect) correct += 1;
       feedback.dataset.correct = String(isCorrect);
       feedback.textContent = `${isCorrect ? "¡Muy bien!" : "Sigamos aprendiendo."} ${question.explanation}`;
+      window.ArithmeticVisuals?.render(find("quantity-visual"), lesson.id, question, true);
       pose(isCorrect ? "congratulating" : "thinking", isCorrect ? "Mati felicita tu respuesta" : "Mati te ayuda a pensar");
       input.disabled = true;
       submit.disabled = true;

@@ -25,6 +25,25 @@
 .arithmetic-results dd { margin: 8px 0 0; font-size: 2rem; font-weight: 800; }
 .arithmetic-panel dialog { max-width: min(90vw, 460px); border: 0; border-radius: 20px; padding: 28px; color: var(--dark-blue); }
 .arithmetic-panel dialog::backdrop { background: rgb(23 50 77 / 60%); }
+.quantity-visual { margin: 20px 0; }
+.arithmetic-panel .quantity-hint { font-size: .95rem; font-weight: 700; }
+.quantity-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 14px; }
+.quantity-card { padding: 18px; border: 2px solid #d7eeef; border-radius: 18px; background: var(--light-blue); }
+.quantity-incoming { background: #fff5d7; border-color: #f3dfa0; }
+.arithmetic-panel .quantity-label { margin: 0 0 14px; font-size: 1rem; font-weight: 800; }
+.quantity-objects { display: flex; flex-wrap: wrap; gap: 10px; align-items: center; }
+.quantity-object { display: grid; place-items: center; flex: 0 0 36px; width: 36px; height: 36px; font-size: 1.6rem; }
+.quantity-sticker { color: #17324d; background: #ffd54f; border: 2px solid white; border-radius: 10px; box-shadow: 0 2px 3px rgb(23 50 77 / 15%); }
+.quantity-sticker:nth-child(3n + 2) { background: #ffc7b0; }
+.quantity-sticker:nth-child(3n) { background: #9de1dc; }
+.quantity-marble { border-radius: 50%; border: 2px solid #00776c; background: radial-gradient(circle at 30% 25%, white, #53c3c9 35%, #00897b); }
+.quantity-token { border-radius: 50%; border: 3px solid #bf7b00; background: #ffd54f; box-shadow: inset 0 0 0 3px #ffe899; }
+.quantity-bag { border-bottom: 5px solid var(--turquoise); }
+.quantity-removed { opacity: .35; position: relative; }
+.quantity-removed::after { content: ""; position: absolute; width: 40px; height: 3px; background: var(--dark-blue); transform: rotate(-45deg); }
+.quantity-incoming .quantity-object { animation: quantity-appear 350ms ease-out both; animation-delay: calc(var(--object-index) * 35ms); }
+@keyframes quantity-appear { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+@media (prefers-reduced-motion: reduce) { .quantity-incoming .quantity-object { animation: none; } }
 @media (max-width: 480px) { .arithmetic-shell { margin: 16px auto; } .arithmetic-results { grid-template-columns: 1fr; } .arithmetic-answer { align-items: stretch; flex-direction: column; } }
 
 /* Addition uses the project's original character and operation icon sheet. */
