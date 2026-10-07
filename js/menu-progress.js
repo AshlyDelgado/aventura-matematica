@@ -30,7 +30,9 @@
         : `${id === "game-missing" ? "Número escondido · " : ""}Mejor resultado: ${progress.percent} % · ${progress.completed ? "Meta alcanzada" : "Por completar"}`;
       element.classList.toggle("is-completed", progress.completed);
       const link = element.closest("a");
-      if (link) link.setAttribute("aria-label", `${progress.title}. ${element.textContent}`);
+      if (link && link.querySelectorAll("[data-activity-progress]").length === 1) {
+        link.setAttribute("aria-label", `${progress.title}. ${element.textContent}`);
+      }
     });
     const completed = Object.keys(activities).filter(id => getProgress(id).completed).length;
     document.querySelectorAll("[data-progress-summary]").forEach(element => {
