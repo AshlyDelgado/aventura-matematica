@@ -13,28 +13,27 @@
     <script src="../js/subtraction.js" defer></script>
     <script src="../js/arithmetic-visuals.js" defer></script>
     <script src="../js/arithmetic.js" defer></script>
+    <script src="../js/operation-example.js" defer></script>
   </head>
-  <body>
+  <body class="addition-page subtraction-page">
     <main class="arithmetic-shell">
       <div class="arithmetic-panel">
         <header>
           <nav class="arithmetic-topbar" aria-label="Navegación principal">
-            <strong>Aventura Matemática</strong>
+            <strong class="addition-brand">Aventura <span>Matemática</span></strong>
             <a href="menu.html" data-outbound>Menú</a>
-            <span>Puntaje: <strong data-points>0</strong></span>
+            <span class="addition-score">Puntaje: <strong data-points>0</strong></span>
           </nav>
-          <h1>Restar</h1>
+          <div class="addition-heading"><span class="addition-icon" aria-hidden="true"></span><div><p class="addition-eyebrow">Quita, cuenta y descubre</p><h1>La aventura de restar</h1></div></div>
         </header>
         <section data-lesson aria-labelledby="lesson-title">
-          <h2 id="lesson-title" tabindex="-1" data-lesson-title>Aprendamos a restar</h2>
-          <p>Restar es quitar una cantidad para saber cuánto queda.</p>
+          <div class="addition-welcome"><div class="addition-welcome-copy"><p class="addition-eyebrow">Mati te acompaña</p><h2 id="lesson-title" tabindex="-1" data-lesson-title>¡Aprendamos a restar!</h2><p>Restar es quitar una cantidad para saber cuánto queda.</p></div><div class="addition-fox"><img src="../assets/images/mati.png" alt="Mati te da la bienvenida" /></div></div>
           <article class="arithmetic-example" aria-labelledby="example-title">
             <h3 id="example-title">Un ejemplo paso a paso</h3>
             <p>Tienes 9 lápices y prestas 4. ¿Cuántos te quedan?</p>
-            <ol><li>Empieza con los 9 lápices.</li><li>Quita 4: cuenta hacia atrás 8, 7, 6 y 5.</li><li>Quedan 5 lápices. Por eso, 9 − 4 = 5.</li></ol>
+            <div data-operation-example="subtraction"><div data-example-visuals></div><p class="apple-instruction" data-example-message aria-live="polite" aria-atomic="true"></p><p class="apple-equation" data-example-equation></p><div class="arithmetic-actions"><button type="button" data-example-next>Avanzar</button><button type="button" class="arithmetic-secondary" data-example-reset>Volver a empezar</button></div></div><noscript><p>Activa JavaScript para recorrer el ejemplo interactivo y practicar.</p></noscript>
           </article>
-          <p>Ahora resuelve 10 ejercicios. Necesitas 8 respuestas correctas para alcanzar el 80 %. Cada respuesta correcta vale 10 puntos; al repetir, solo sumas puntos nuevos si mejoras tu mejor resultado.</p>
-          <button type="button" data-start>Comenzar práctica</button>
+          <div class="addition-practice-card"><div><h3>¿Listo para tu aventura?</h3><p>Resuelve 10 ejercicios. ¡Con 8 respuestas correctas alcanzas la meta!</p></div><button type="button" data-start>¡Vamos a practicar!</button><p class="addition-points-note">Cada acierto vale 10 puntos. Al repetir, sumas puntos nuevos cuando mejoras tu mejor resultado.</p></div>
         </section>
         <section data-practice aria-labelledby="question-title" hidden>
           <div class="arithmetic-status"><h2 id="question-title" data-counter></h2></div>

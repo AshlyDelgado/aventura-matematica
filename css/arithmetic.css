@@ -86,6 +86,9 @@
 .addition-page .addition-heading h1 { margin: 4px 0 0; font-size: clamp(1.8rem, 5vw, 2.7rem); }
 .addition-page .addition-eyebrow { margin: 0; color: var(--turquoise); font-size: .85rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
 .addition-icon { flex: 0 0 80px; width: 80px; height: 80px; border-radius: 50%; background: url("../assets/images/operation-icons.png") -401px -81px / 1000px 375px no-repeat; }
+.subtraction-page .addition-icon { background-position: -530px -81px; }
+.multiplication-page .addition-icon { background-position: -401px -202px; }
+.division-page .addition-icon { background-position: -530px -202px; }
 .addition-welcome { display: grid; grid-template-columns: 1fr 200px; align-items: center; gap: 24px; padding: 24px 30px; background: var(--light-blue); border-radius: 24px; border: 2px solid #d7eeef; }
 .addition-welcome h2 { margin: 8px 0 12px; font-size: clamp(1.5rem, 4vw, 2rem); }
 .addition-welcome-copy p:last-child { margin-bottom: 0; }
@@ -117,4 +120,7 @@
   .addition-icon { flex-basis: 64px; width: 64px; height: 64px; background-size: 800px 300px; background-position: -321px -65px; }
   .addition-practice-card button { width: 100%; }
   .addition-brand { flex-basis: 100%; }
+  .subtraction-page .addition-icon { background-position: -424px -65px; }
+  .multiplication-page .addition-icon { background-position: -321px -162px; }
+  .division-page .addition-icon { background-position: -424px -162px; }
 }
