@@ -70,6 +70,13 @@
 .addition-practice-card h3 { font: 600 1.4rem "Fredoka", sans-serif; margin: 0 0 8px; }
 .addition-practice-card p { margin: 0; }
 .addition-page .addition-points-note { flex-basis: 100%; font-size: .9rem; }
+.addition-page .arithmetic-panel p:not(.apple-equation):not(.arithmetic-expression),
+.addition-page .apple-group-label,
+.addition-page .arithmetic-answer label,
+.addition-page .arithmetic-results dt {
+  font-family: "Nunito", "Trebuchet MS", Arial, sans-serif;
+  font-weight: 700;
+}
 .addition-page button { box-shadow: 0 4px 0 #006c62; transition: background-color 150ms ease; }
 .addition-page button:hover:not(:disabled) { background: #00776c; }
 .addition-page button.arithmetic-secondary:hover { background: var(--light-blue); }
