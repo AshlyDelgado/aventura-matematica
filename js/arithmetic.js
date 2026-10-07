@@ -127,7 +127,7 @@
     find("review").addEventListener("click", () => { show(intro); find("lesson-title").focus(); });
     const dialog = find("leave-dialog");
     find("leave").addEventListener("click", () => {
-      find("leave-confirm").href = "menu.html";
+      find("leave-confirm").href = lesson.id === "game-missing" ? "games.html" : "menu.html";
       dialog.showModal();
     });
     find("stay").addEventListener("click", () => dialog.close());

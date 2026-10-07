@@ -84,8 +84,27 @@ test('leaving the adventure resets all activity records and points', () => {
   const context = vm.createContext({ window: { localStorage: { setItem: (key,value) => saved.set(key,value) } }, document: { addEventListener() {}, querySelectorAll: () => [] } });
   vm.runInContext(fs.readFileSync(path.join(root,'js','navigation.js'),'utf8'), context);
   context.window.AventuraMatematicaNavigation.resetStoredProgress();
-  assert.equal(saved.size,8);
-  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...[...Object.keys(operations),'final','game-memory'].map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
+  assert.equal(saved.size,9);
+  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...[...Object.keys(operations),'final','game-memory','game-missing'].map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
+});
+
+test('missing number game uses its expressions, validates solutions and awards improvements', () => {
+  const app = activity('missing-number');
+  assert.equal(app.lesson.exercises.length,12);
+  for (const q of app.lesson.exercises) {
+    const filled = q.expression.replace('?',String(q.answer));
+    const [left,result] = filled.split(' = ');
+    const [a,symbol,b] = left.split(' ');
+    const calculations = {'+': () => Number(a)+Number(b), '−': () => Number(a)-Number(b), '×': () => Number(a)*Number(b), '÷': () => Number(a)/Number(b)};
+    assert.equal(calculations[symbol](),Number(result));
+  }
+  app.finish(9);
+  assert.equal(app.node('result-title').textContent,'¡Sigue practicando!');
+  app.finish(10);
+  assert.equal(app.node('result-title').textContent,'¡Objetivo alcanzado!');
+  assert.equal(app.storage.get('aventuraMatematicaPoints'),'100');
+  app.finish(10);
+  assert.equal(app.storage.get('aventuraMatematicaPoints'),'100');
 });
 
 test('final assessment defers feedback, requires 16 of 20 and reports all operations', () => {

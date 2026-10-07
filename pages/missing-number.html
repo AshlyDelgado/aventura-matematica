@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>El número escondido | Aventura Matemática</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/arithmetic.css" />
+    <script src="../js/navigation.js" defer></script>
+    <script src="../js/missing-number.js" defer></script>
+    <script src="../js/arithmetic-visuals.js" defer></script>
+    <script src="../js/arithmetic.js" defer></script>
+
+  </head>
+  <body class="addition-page">
+    <main class="arithmetic-shell">
+      <div class="arithmetic-panel">
+        <header>
+          <nav class="arithmetic-topbar" aria-label="Navegación principal">
+            <strong class="addition-brand">Aventura <span>Matemática</span></strong>
+            <a href="games.html" data-outbound>Juegos</a>
+            <span class="addition-score">Puntaje: <strong data-points>0</strong></span>
+          </nav>
+          <div class="addition-heading">
+            <span class="addition-icon" aria-hidden="true"></span>
+            <div><p class="addition-eyebrow">Un misterio matemático</p><h1>El número escondido</h1></div>
+          </div>
+        </header>
+        <section data-lesson aria-labelledby="lesson-title"><div class="addition-welcome"><div class="addition-welcome-copy"><p class="addition-eyebrow">Juega con Mati</p><h2 id="lesson-title" tabindex="-1" data-lesson-title>¡Encuentra el número que falta!</h2><p>En cada operación hay un número escondido. Por ejemplo, en 2 + ? = 5, falta el 3, porque 2 + 3 = 5.</p><p>Resuelve 12 misterios de las cuatro operaciones. Necesitas 10 respuestas correctas para alcanzar al menos el 80 %. Cada acierto vale 10 puntos; al repetir, solo sumas puntos si mejoras tu mejor resultado.</p></div><div class="addition-fox"><img src="../assets/images/mati.png" alt="Mati te invita a buscar los números escondidos" /></div></div><div class="addition-practice-card"><button type="button" data-start>Buscar los números</button><a href="games.html">Elegir otro juego</a></div></section><section data-practice aria-labelledby="question-title" hidden>
+          <div class="arithmetic-status"><h2 id="question-title" data-counter></h2></div>
+          <progress data-progress max="12" value="0" aria-label="Ejercicios respondidos"></progress>
+
+          <p data-question></p>
+          <div class="quantity-visual" data-quantity-visual role="group" aria-label="Objetos del ejercicio"></div>
+          <p class="arithmetic-expression" data-expression></p>
+          <form class="arithmetic-answer" data-answer-form>
+            <label for="answer">Tu respuesta
+              <input id="answer" name="answer" type="text" inputmode="numeric" autocomplete="off" required aria-describedby="answer-help feedback" data-answer />
+            </label>
+            <button type="submit" data-check>Comprobar</button>
+          </form>
+          <p id="answer-help">Escribe un número entero mayor o igual a cero.</p>
+          <section class="arithmetic-mati-dialogue" aria-label="Mati te acompaña">
+            <img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te anima a resolver el ejercicio" data-mati />
+            <div class="arithmetic-speech-bubble">
+              <span class="arithmetic-speaker">Mati</span>
+              <p id="feedback" class="arithmetic-feedback" aria-live="polite" aria-atomic="true" data-feedback></p>
+            </div>
+          </section>
+          <div class="arithmetic-actions">
+            <button type="button" data-next hidden>Siguiente ejercicio</button>
+            <button class="arithmetic-secondary" type="button" data-leave>Volver a los juegos</button>
+          </div>
+        </section>
+        <section data-results aria-labelledby="result-title" hidden>
+          <h2 id="result-title" tabindex="-1" data-result-title>Resultados</h2>
+          <p data-result-message></p>
+          <dl class="arithmetic-results">
+            <div><dt>Correctas</dt><dd data-correct>0</dd></div>
+            <div><dt>Incorrectas</dt><dd data-incorrect>0</dd></div>
+            <div><dt>Porcentaje</dt><dd data-percent>0 %</dd></div>
+          </dl>
+          <p data-points-earned></p>
+          <div class="arithmetic-actions">
+            <button type="button" data-retry>Practicar de nuevo</button>
+            <button type="button" class="arithmetic-secondary" data-review>Ver instrucciones</button>
+            <a href="games.html">Volver a los juegos</a>
+          </div>
+        </section>
+        <dialog data-leave-dialog aria-labelledby="leave-title" aria-describedby="leave-description">
+          <h2 id="leave-title">¿Volver a los juegos?</h2>
+          <p id="leave-description">Perderás las respuestas de este intento. Los puntos de intentos terminados se conservan.</p>
+          <div class="arithmetic-actions">
+            <button type="button" autofocus data-stay>Seguir practicando</button>
+            <a class="arithmetic-button arithmetic-secondary" href="games.html" data-leave-confirm>Salir de la práctica</a>
+          </div>
+        </dialog>
+      </div>
+    </main>
+  </body>
+</html>

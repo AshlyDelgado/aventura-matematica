@@ -3,6 +3,7 @@
   "use strict";
   function describe(operation, question, answered = false) {
     const { a, b } = question;
+    if (operation === "game-missing") return [{ label: question.visualLabel, count: question.visualTotal, kind: "token" }];
     if (operation === "addition") return [
       { label: `Ya tienes ${a} calcomanías`, count: a, kind: "sticker" },
       { label: `Recibes ${b} calcomanías más`, count: b, kind: "sticker", incoming: true },
