@@ -37,7 +37,6 @@ function activity(id, storage = new Map(), blocked = false) {
 
 const operations = {addition:(a,b)=>a+b,subtraction:(a,b)=>a-b,multiplication:(a,b)=>a*b,division:(a,b)=>a/b};
 for (const [id,calculate] of Object.entries(operations)) {
-  if (!fs.statSync(path.join(root,'js',`${id}.js`)).size) continue;
   test(`${id}: exercises, threshold, retries and improvement points`, () => {
     const app = activity(id);
     assert.equal(app.lesson.exercises.length,10);
@@ -79,3 +78,12 @@ for (const [id,calculate] of Object.entries(operations)) {
     assert.equal(app.node('percent').textContent,'100 %');
   });
 }
+
+test('leaving the adventure resets all activity records and points', () => {
+  const saved = new Map();
+  const context = vm.createContext({ window: { localStorage: { setItem: (key,value) => saved.set(key,value) } }, document: { addEventListener() {}, querySelectorAll: () => [] } });
+  vm.runInContext(fs.readFileSync(path.join(root,'js','navigation.js'),'utf8'), context);
+  context.window.AventuraMatematicaNavigation.resetStoredProgress();
+  assert.equal(saved.size,6);
+  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...Object.keys(operations).map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
+});

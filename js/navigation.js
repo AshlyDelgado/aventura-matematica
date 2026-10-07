@@ -1,5 +1,7 @@
 const POINTS_STORAGE_KEY = "aventuraMatematicaPoints";
 const IDENTIFY_BEST_STORAGE_KEY = "aventuraMatematicaIdentifyBest";
+const ARITHMETIC_BEST_STORAGE_KEYS = ["addition", "subtraction", "multiplication", "division"]
+  .map((operation) => `aventuraMatematica${operation}Best`);
 
 function getStoredPoints() {
   let savedPoints;
@@ -47,6 +49,7 @@ function resetStoredProgress() {
   try {
     window.localStorage.setItem(POINTS_STORAGE_KEY, "0");
     window.localStorage.setItem(IDENTIFY_BEST_STORAGE_KEY, "0");
+    ARITHMETIC_BEST_STORAGE_KEYS.forEach((key) => window.localStorage.setItem(key, "0"));
   } catch (error) {
     return;
   }
