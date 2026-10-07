@@ -106,7 +106,10 @@
     find("retry").addEventListener("click", start);
     find("review").addEventListener("click", () => { show(intro); find("lesson-title").focus(); });
     const dialog = find("leave-dialog");
-    find("leave").addEventListener("click", () => dialog.showModal());
+    find("leave").addEventListener("click", () => {
+      find("leave-confirm").href = "menu.html";
+      dialog.showModal();
+    });
     find("stay").addEventListener("click", () => dialog.close());
     // Guard all outbound links while an attempt is active.
     document.querySelectorAll("a[data-outbound]").forEach((link) => {
@@ -118,6 +121,5 @@
         }
       });
     });
-    find("leave").addEventListener("click", () => { find("leave-confirm").href = "menu.html"; });
   });
 })();
