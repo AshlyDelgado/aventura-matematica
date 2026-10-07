@@ -84,6 +84,27 @@ test('leaving the adventure resets all activity records and points', () => {
   const context = vm.createContext({ window: { localStorage: { setItem: (key,value) => saved.set(key,value) } }, document: { addEventListener() {}, querySelectorAll: () => [] } });
   vm.runInContext(fs.readFileSync(path.join(root,'js','navigation.js'),'utf8'), context);
   context.window.AventuraMatematicaNavigation.resetStoredProgress();
-  assert.equal(saved.size,6);
-  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...Object.keys(operations).map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
+  assert.equal(saved.size,7);
+  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...[...Object.keys(operations),'final'].map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
+});
+
+test('final assessment defers feedback, requires 16 of 20 and reports all operations', () => {
+  const app = activity('final-assessment');
+  assert.equal(app.lesson.exercises.length,20);
+  app.node('start').fire('click');
+  app.answer(app.lesson.exercises[0].answer);
+  assert.ok(app.node('feedback').textContent.includes('Respuesta guardada'));
+  assert.equal(app.node('feedback').dataset.correct,undefined);
+  app.finish(15);
+  assert.equal(app.node('result-title').textContent,'¡Sigue practicando!');
+  app.finish(16);
+  assert.equal(app.node('result-title').textContent,'¡Objetivo alcanzado!');
+  assert.equal(app.storage.get('aventuraMatematicaPoints'),'160');
+  for (const operation of Object.keys(operations)) {
+    assert.equal(app.lesson.exercises.filter(q => q.operation === operation).length,5);
+    assert.match(app.node(`result-${operation}`).textContent,/de 5/);
+  }
+  assert.match(app.node('answer-review').textContent,/Tu respuesta:/);
+  app.finish(16);
+  assert.equal(app.storage.get('aventuraMatematicaPoints'),'160');
 });

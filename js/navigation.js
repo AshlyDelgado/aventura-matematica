@@ -1,6 +1,6 @@
 const POINTS_STORAGE_KEY = "aventuraMatematicaPoints";
 const IDENTIFY_BEST_STORAGE_KEY = "aventuraMatematicaIdentifyBest";
-const ARITHMETIC_BEST_STORAGE_KEYS = ["addition", "subtraction", "multiplication", "division"]
+const ARITHMETIC_BEST_STORAGE_KEYS = ["addition", "subtraction", "multiplication", "division", "final"]
   .map((operation) => `aventuraMatematica${operation}Best`);
 
 function getStoredPoints() {

@@ -1,0 +1,88 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Evaluación final | Aventura Matemática</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@600;700&family=Nunito:wght@400;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="../css/styles.css" />
+    <link rel="stylesheet" href="../css/arithmetic.css" />
+    <script src="../js/navigation.js" defer></script>
+    <script src="../js/final-assessment.js" defer></script>
+    <script src="../js/arithmetic-visuals.js" defer></script>
+    <script src="../js/arithmetic.js" defer></script>
+
+  </head>
+  <body class="addition-page">
+    <main class="arithmetic-shell">
+      <div class="arithmetic-panel">
+        <header>
+          <nav class="arithmetic-topbar" aria-label="Navegación principal">
+            <strong class="addition-brand">Aventura <span>Matemática</span></strong>
+            <a href="menu.html" data-outbound>Menú</a>
+            <span class="addition-score">Puntaje: <strong data-points>0</strong></span>
+          </nav>
+          <div class="addition-heading">
+            <span class="addition-icon" aria-hidden="true"></span>
+            <div><p class="addition-eyebrow">Pon en práctica lo aprendido</p><h1>Mi reto final</h1></div>
+          </div>
+        </header>
+        <section data-lesson aria-labelledby="lesson-title">
+          <div class="addition-welcome"><div class="addition-welcome-copy"><p class="addition-eyebrow">Mati te acompaña</p><h2 id="lesson-title" tabindex="-1" data-lesson-title>¡Demuestra lo que aprendiste!</h2><p>Resuelve 20 ejercicios: 5 de suma, 5 de resta, 5 de multiplicación y 5 de división. Necesitas 16 respuestas correctas para alcanzar el 80 %.</p><p>Las respuestas se guardan durante este intento. Al terminar verás las correcciones y tus resultados por operación.</p></div><div class="addition-fox"><img src="../assets/images/mati.png" alt="Mati te anima a completar el reto final" /></div></div>
+          <div class="addition-practice-card"><p>Sin límite de tiempo. Piensa, cuenta y responde a tu ritmo.</p><button type="button" data-start>Comenzar evaluación</button></div>
+        </section>
+        <section data-practice aria-labelledby="question-title" hidden>
+          <div class="arithmetic-status"><h2 id="question-title" data-counter></h2></div>
+          <progress data-progress max="20" value="0" aria-label="Ejercicios respondidos"></progress>
+
+          <p data-question></p>
+          <div class="quantity-visual" data-quantity-visual role="group" aria-label="Objetos del ejercicio"></div>
+          <p class="arithmetic-expression" data-expression></p>
+          <form class="arithmetic-answer" data-answer-form>
+            <label for="answer">Tu respuesta
+              <input id="answer" name="answer" type="text" inputmode="numeric" autocomplete="off" required aria-describedby="answer-help feedback" data-answer />
+            </label>
+            <button type="submit" data-check>Comprobar</button>
+          </form>
+          <p id="answer-help">Escribe un número entero mayor o igual a cero.</p>
+          <section class="arithmetic-mati-dialogue" aria-label="Mati te acompaña">
+            <img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te anima a resolver el ejercicio" data-mati />
+            <div class="arithmetic-speech-bubble">
+              <span class="arithmetic-speaker">Mati</span>
+              <p id="feedback" class="arithmetic-feedback" aria-live="polite" aria-atomic="true" data-feedback></p>
+            </div>
+          </section>
+          <div class="arithmetic-actions">
+            <button type="button" data-next hidden>Siguiente ejercicio</button>
+            <button class="arithmetic-secondary" type="button" data-leave>Volver al menú</button>
+          </div>
+        </section>
+        <section data-results aria-labelledby="result-title" hidden>
+          <h2 id="result-title" tabindex="-1" data-result-title>Resultados</h2>
+          <p data-result-message></p>
+          <dl class="arithmetic-results">
+            <div><dt>Correctas</dt><dd data-correct>0</dd></div>
+            <div><dt>Incorrectas</dt><dd data-incorrect>0</dd></div>
+            <div><dt>Porcentaje</dt><dd data-percent>0 %</dd></div>
+          </dl>
+          <p data-points-earned></p><h3>Resultados por operación</h3><dl class="assessment-breakdown"><div><dt>Suma</dt><dd data-result-addition></dd></div><div><dt>Resta</dt><dd data-result-subtraction></dd></div><div><dt>Multiplicación</dt><dd data-result-multiplication></dd></div><div><dt>División</dt><dd data-result-division></dd></div></dl><details><summary>Revisar mis respuestas</summary><p class="assessment-review" data-answer-review></p></details>
+          <div class="arithmetic-actions">
+            <button type="button" data-retry>Practicar de nuevo</button>
+            <button type="button" class="arithmetic-secondary" data-review>Ver instrucciones</button>
+            <a href="menu.html">Volver al menú</a>
+          </div>
+        </section>
+        <dialog data-leave-dialog aria-labelledby="leave-title" aria-describedby="leave-description">
+          <h2 id="leave-title">¿Volver al menú?</h2>
+          <p id="leave-description">Perderás las respuestas de este intento. Los puntos de intentos terminados se conservan.</p>
+          <div class="arithmetic-actions">
+            <button type="button" autofocus data-stay>Seguir practicando</button>
+            <a class="arithmetic-button arithmetic-secondary" href="menu.html" data-leave-confirm>Salir de la práctica</a>
+          </div>
+        </dialog>
+      </div>
+    </main>
+  </body>
+</html>

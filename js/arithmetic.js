@@ -4,6 +4,7 @@
   const lesson = window.ArithmeticLesson;
   if (!lesson) return;
   const total = lesson.exercises.length;
+  const passingCorrect = Math.ceil(total * 0.8);
   const pointsKey = "aventuraMatematicaPoints";
   const bestKey = `aventuraMatematica${lesson.id}Best`;
   const read = (key) => {
@@ -27,6 +28,7 @@
     const feedback = find("feedback");
     const mati = find("mati");
     let questions = [], index = 0, correct = 0, answered = false;
+    let responses = [];
     const show = (section) => {
       [intro, quiz, results].forEach((item) => { item.hidden = item !== section; });
     };
@@ -40,8 +42,8 @@
       find("counter").textContent = `Ejercicio ${index + 1} de ${total}`;
       find("progress").value = index;
       find("question").textContent = question.statement;
-      find("expression").textContent = `${question.a} ${lesson.symbol} ${question.b} = ?`;
-      window.ArithmeticVisuals?.render(find("quantity-visual"), lesson.id, question);
+      find("expression").textContent = question.expression || `${question.a} ${question.symbol || lesson.symbol} ${question.b} = ?`;
+      window.ArithmeticVisuals?.render(find("quantity-visual"), question.operation || lesson.id, question);
       input.value = "";
       input.disabled = false;
       submit.disabled = false;
@@ -60,6 +62,7 @@
       }
       index = 0;
       correct = 0;
+      responses = [];
       show(quiz);
       render();
     };
@@ -75,10 +78,15 @@
       const isCorrect = Number(input.value) === question.answer;
       answered = true;
       if (isCorrect) correct += 1;
-      feedback.dataset.correct = String(isCorrect);
-      feedback.textContent = `${isCorrect ? "¡Muy bien!" : "Sigamos aprendiendo."} ${question.explanation}`;
-      window.ArithmeticVisuals?.render(find("quantity-visual"), lesson.id, question, true);
-      pose(isCorrect ? "congratulating" : "thinking", isCorrect ? "Mati felicita tu respuesta" : "Mati te ayuda a pensar");
+      responses.push({ question, answer: Number(input.value), isCorrect });
+      if (lesson.deferFeedback) {
+        feedback.textContent = "¡Respuesta guardada! Sigue con el próximo ejercicio. Al final revisaremos tus resultados juntos.";
+      } else {
+        feedback.dataset.correct = String(isCorrect);
+        feedback.textContent = `${isCorrect ? "¡Muy bien!" : "Sigamos aprendiendo."} ${question.explanation}`;
+        window.ArithmeticVisuals?.render(find("quantity-visual"), question.operation || lesson.id, question, true);
+        pose(isCorrect ? "congratulating" : "thinking", isCorrect ? "Mati felicita tu respuesta" : "Mati te ayuda a pensar");
+      }
       input.disabled = true;
       submit.disabled = true;
       find("progress").value = index + 1;
@@ -92,14 +100,24 @@
       const gained = Math.max(0, correct - best) * 10;
       if (correct > best) write(bestKey, correct);
       if (gained > 0) write(pointsKey, read(pointsKey) + gained);
-      find("result-title").textContent = correct / total >= 0.8 ? "¡Objetivo alcanzado!" : "¡Sigue practicando!";
+      find("result-title").textContent = correct >= passingCorrect ? "¡Objetivo alcanzado!" : "¡Sigue practicando!";
       find("correct").textContent = correct;
       find("incorrect").textContent = total - correct;
       find("percent").textContent = `${Math.round(correct / total * 100)} %`;
       find("points-earned").textContent = `${correct * 10} puntos en este intento. ${gained} puntos nuevos para tu aventura.`;
-      find("result-message").textContent = correct / total >= 0.8
+      find("result-message").textContent = correct >= passingCorrect
         ? "Resolviste correctamente al menos el 80 % de los ejercicios."
-        : "Vuelve a revisar el ejemplo y practica otra vez. Necesitas 8 respuestas correctas de 10.";
+        : `Vuelve a repasar y practica otra vez. Necesitas ${passingCorrect} respuestas correctas de ${total}.`;
+      if (lesson.deferFeedback) {
+        for (const operation of ["addition", "subtraction", "multiplication", "division"]) {
+          const attempts = responses.filter(response => response.question.operation === operation);
+          const hits = attempts.filter(response => response.isCorrect).length;
+          find(`result-${operation}`).textContent = `${hits} de ${attempts.length} · ${Math.round(hits / attempts.length * 100)} %`;
+        }
+        find("answer-review").textContent = responses.map((response, i) =>
+          `${i + 1}. ${response.question.a} ${response.question.symbol} ${response.question.b} = ${response.question.answer}. Tu respuesta: ${response.answer}. ${response.isCorrect ? "Correcta." : "Para repasar: " + response.question.explanation}`
+        ).join("\n\n");
+      }
       window.AventuraMatematicaNavigation?.renderStoredPoints();
       show(results);
       find("result-title").focus();

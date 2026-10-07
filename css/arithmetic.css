@@ -36,6 +36,13 @@
 .arithmetic-results dd { margin: 8px 0 0; font-size: 2rem; font-weight: 800; }
 .arithmetic-panel dialog { max-width: min(90vw, 460px); border: 0; border-radius: 20px; padding: 28px; color: var(--dark-blue); }
 .arithmetic-panel dialog::backdrop { background: rgb(23 50 77 / 60%); }
+.assessment-breakdown { display: grid; grid-template-columns: repeat(auto-fit, minmax(180px, 1fr)); gap: 14px; }
+.assessment-breakdown div { padding: 18px; border-radius: 14px; background: var(--light-blue); }
+.assessment-breakdown dt { font-weight: 800; }
+.assessment-breakdown dd { margin: 8px 0 0; }
+.assessment-review { white-space: pre-line; }
+.arithmetic-panel details { margin: 24px 0; }
+.arithmetic-panel summary { cursor: pointer; font-weight: 800; padding: 12px 0; }
 .quantity-visual { margin: 20px 0; }
 .arithmetic-panel .quantity-hint { font-size: .95rem; font-weight: 700; }
 .quantity-groups { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 14px; }
