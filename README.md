@@ -9,9 +9,12 @@ Abrir `index.html` en un navegador moderno. Para revisar o publicar el recurso, 
 ## Actividades implementadas
 
 - **OA1:** identificar la operación en diez situaciones cotidianas, con retroalimentación y resultados. Se alcanza la meta con ocho respuestas correctas.
-- **OA2:** módulos de suma, resta, multiplicación y división. Cada uno contiene una explicación, un ejemplo paso a paso y diez ejercicios en orden aleatorio, con validación y retroalimentación inmediata. Cada módulo mide la meta del 80 % por separado; no hay una evaluación consolidada de las cuatro operaciones.
+- **OA2:** módulos de suma, resta, multiplicación y división. Cada uno contiene una explicación, un ejemplo visual que avanza por clic y diez ejercicios en orden aleatorio. Las cantidades se representan con objetos y Mati ofrece retroalimentación inmediata mediante un globo de diálogo.
+- **Evaluación final:** veinte ejercicios, cinco por operación, en orden aleatorio. La meta general es dieciséis aciertos (80 %). Las correcciones se muestran al terminar, junto con resultados por operación y una revisión de las respuestas. Los porcentajes por operación ayudan a identificar qué repasar; no condicionan la meta general.
+- **Juegos educativos:** parejas matemáticas (seis parejas de operación y resultado, sin límite de tiempo) y el número escondido (doce operaciones con una cantidad desconocida y pistas visuales).
 - Puntaje acumulado en `localStorage`: diez puntos por respuesta correcta del mejor intento de cada actividad. Repetir un resultado no duplica puntos; mejorar suma únicamente la diferencia.
-- Salir desde el menú reinicia puntos y mejores resultados de las cinco actividades. Volver al menú durante una práctica descarta ese intento, previa confirmación.
+- El juego de parejas concede sesenta puntos al completarlo por primera vez. Repetirlo no duplica puntos.
+- Salir desde el menú reinicia puntos y mejores resultados de las ocho actividades. Volver al menú durante una práctica descarta ese intento, previa confirmación.
 
 La práctica sigue funcionando si el navegador bloquea el almacenamiento, pero los resultados no se conservan. Se recomienda usar siempre el mismo origen HTTP para conservar el progreso de manera consistente.
 
@@ -20,17 +23,18 @@ La práctica sigue funcionando si el navegador bloquea el almacenamiento, pero l
 Con Node.js 22 o posterior:
 
 ```sh
-node tests/arithmetic.test.cjs
+node tests/run.cjs
 ```
 
-Las pruebas verifican respuestas matemáticas, el umbral del 80 %, reintentos, mejora del puntaje, entradas inválidas, bloqueo de respuestas duplicadas, almacenamiento no disponible y reinicio global. Utilizan un entorno DOM simulado; no sustituyen las pruebas visuales y de interacción en un navegador.
+Las pruebas verifican respuestas matemáticas, umbrales del 80 %, reintentos, mejora del puntaje, entradas inválidas, bloqueo de respuestas duplicadas, almacenamiento no disponible, reinicio global, cantidades visuales, ejemplos interactivos, evaluación final y reglas del juego de parejas. Utilizan un entorno DOM simulado; no sustituyen las pruebas visuales y de interacción en un navegador.
+
+La revisión del 7 de octubre de 2026 también utilizó Chrome real, servido por HTTP local, en anchos de 1280 y 390 píxeles. Véase [el registro de verificación](docs/verification.md).
 
 Antes de entregar, revisar en escritorio y celular: inicio y menú, cada módulo, respuestas correctas e incorrectas, resultados con siete y ocho aciertos, reintentos, confirmación de salida, teclado y conservación del puntaje al recargar.
 
 ## Pendientes
 
-- Revisión visual y pruebas de interacción en navegador.
-- Integración de logos e íconos propios: las referencias están en `references/mockups`; confirmar los archivos finales antes de incorporarlos.
-- Juegos educativos y evaluación final (el menú los identifica como próximos).
+- Revisión de contenido y diseño por el equipo, y comprobación en otros navegadores y dispositivos físicos.
+- Las páginas de operaciones ya usan Mati y los íconos propios de `references/mockups`. Cualquier reemplazo de estos recursos debe conservar los archivos originales y acordarse con el equipo.
 - Publicación y actualización del enlace y fecha en el documento de entrega.
 - Verificación de las observaciones de avances anteriores.
