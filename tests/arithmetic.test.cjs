@@ -12,7 +12,7 @@ function activity(id, storage = new Map(), blocked = false) {
       hidden: ['practice','results'].includes(key), value: '', dataset: {}, disabled: false,
       handlers: {}, addEventListener(name, fn) { (this.handlers[name] ||= []).push(fn); },
       fire(name) { (this.handlers[name] || []).forEach(fn => fn({ preventDefault() {} })); },
-      focus() {}, removeAttribute(name) { if (name === 'data-correct') delete this.dataset.correct; },
+      focus() { nodes.forEach(item => { item.focused = false; }); this.focused = true; }, removeAttribute(name) { if (name === 'data-correct') delete this.dataset.correct; },
       showModal() { this.open = true; }, close() { this.open = false; },
     });
     return nodes.get(key);
@@ -36,6 +36,16 @@ function activity(id, storage = new Map(), blocked = false) {
 }
 
 const operations = {addition:(a,b)=>a+b,subtraction:(a,b)=>a-b,multiplication:(a,b)=>a*b,division:(a,b)=>a/b};
+test('practice focuses the question before answering and Mati feedback after submitting', () => {
+  const app = activity('addition');
+  app.node('start').fire('click');
+  assert.equal(app.node('counter').focused,true);
+  assert.notEqual(app.node('answer').focused,true);
+  app.answer(app.lesson.exercises[0].answer);
+  assert.equal(app.node('feedback').focused,true);
+  app.node('next').fire('click');
+  assert.equal(app.node('counter').focused,true);
+});
 for (const [id,calculate] of Object.entries(operations)) {
   test(`${id}: exercises, threshold, retries and improvement points`, () => {
     const app = activity(id);

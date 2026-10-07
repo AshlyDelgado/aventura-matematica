@@ -52,7 +52,9 @@
       feedback.removeAttribute("data-correct");
       next.textContent = index === total - 1 ? "Ver resultados" : "Siguiente ejercicio";
       pose("", "Mati acompaña el ejercicio");
-      input.focus();
+      // Let learners read before opening the mobile keyboard.
+      find("counter").tabIndex = -1;
+      find("counter").focus();
     };
     const start = () => {
       questions = [...lesson.exercises];
@@ -91,7 +93,9 @@
       submit.disabled = true;
       find("progress").value = index + 1;
       next.hidden = false;
-      next.focus();
+      // Keep Mati's explanation in view; Tab then reaches the next action.
+      feedback.tabIndex = -1;
+      feedback.focus();
     });
     next.addEventListener("click", () => {
       if (!answered) return;
