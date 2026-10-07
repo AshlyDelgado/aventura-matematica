@@ -15,6 +15,7 @@
     <link rel="icon" href="data:," />
     <link rel="stylesheet" href="../css/styles.css" />
     <script src="../js/navigation.js" defer></script>
+    <script src="../js/menu-progress.js" defer></script>
   </head>
 
   <body>
@@ -74,6 +75,7 @@
           </div>
         </dialog>
 
+        <p class="menu-progress-summary" data-progress-summary>0 de 8 metas alcanzadas</p>
         <section class="menu-mati-card" aria-label="Mensaje de Mati">
           <div class="mati-frame menu-mati-frame">
             <img
@@ -96,6 +98,7 @@
               <span class="module-copy">
                 <strong>Sumar</strong>
                 <span>Junta cantidades y descubre el resultado.</span>
+                <span class="activity-progress" data-activity-progress="addition"></span>
               </span>
             </a>
 
@@ -104,6 +107,7 @@
               <span class="module-copy">
                 <strong>Restar</strong>
                 <span>Quita cantidades y calcula cuánto queda.</span>
+                <span class="activity-progress" data-activity-progress="subtraction"></span>
               </span>
             </a>
 
@@ -116,6 +120,7 @@
               <span class="module-copy">
                 <strong>Multiplicar</strong>
                 <span>Suma varias veces la misma cantidad.</span>
+                <span class="activity-progress" data-activity-progress="multiplication"></span>
               </span>
             </a>
 
@@ -124,6 +129,7 @@
               <span class="module-copy">
                 <strong>Dividir</strong>
                 <span>Reparte cantidades en grupos iguales.</span>
+                <span class="activity-progress" data-activity-progress="division"></span>
               </span>
             </a>
           </div>
@@ -140,6 +146,7 @@
               <span>
                 <strong id="challenge-title">Identifica la operación</strong>
                 <span>Lee una situación y elige si necesitas sumar, restar, multiplicar o dividir.</span>
+                <span class="activity-progress" data-activity-progress="identify"></span>
               </span>
               <span class="challenge-symbols" aria-hidden="true">
                 <span>+</span><span>−</span><span>×</span><span>÷</span>
@@ -153,11 +160,11 @@
           <div class="future-grid">
             <a class="future-card" href="final-assessment.html">
               <h3>Evaluación final</h3>
-              <p>20 ejercicios para demostrar lo aprendido.</p>
+              <p>20 ejercicios para demostrar lo aprendido.</p><span class="activity-progress" data-activity-progress="final"></span>
             </a>
             <a class="future-card" href="games.html">
               <h3>Juegos educativos</h3>
-              <p>Aprende jugando con Mati.</p>
+              <p>Aprende jugando con Mati.</p><span class="activity-progress" data-activity-progress="game-memory"></span><span class="activity-progress" data-activity-progress="game-missing"></span>
             </a>
           </div>
           <button class="menu-exit-button" type="button" data-exit-reset>

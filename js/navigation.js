@@ -55,6 +55,7 @@ function resetStoredProgress() {
   }
 
   renderStoredPoints();
+  window.AventuraMatematicaProgress?.render();
 }
 
 function setupExitReset() {

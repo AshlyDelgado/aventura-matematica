@@ -1368,6 +1368,12 @@ a {
   font-size: 1.25rem;
 }
 
+.menu-progress-summary { margin: 8px 0 0; color: var(--dark-blue); font-weight: 800; text-align: center; }
+.menu-panel .activity-progress,
+.arithmetic-panel .activity-progress { display: block; margin-top: 10px; font: 700 .9rem "Nunito", sans-serif; color: #435a6e; }
+.menu-panel .activity-progress.is-completed,
+.arithmetic-panel .activity-progress.is-completed { color: #006b50; }
+
 a.future-card {
   display: block;
   opacity: 1;
