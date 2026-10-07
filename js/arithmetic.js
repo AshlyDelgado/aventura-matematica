@@ -110,8 +110,14 @@
       find("percent").textContent = `${Math.round(correct / total * 100)} %`;
       find("points-earned").textContent = `${correct * 10} puntos en este intento. ${gained} puntos nuevos para tu aventura.`;
       find("result-message").textContent = correct >= passingCorrect
-        ? "Resolviste correctamente al menos el 80 % de los ejercicios."
-        : `Vuelve a repasar y practica otra vez. Necesitas ${passingCorrect} respuestas correctas de ${total}.`;
+        ? "¡Lo lograste! Resolviste correctamente al menos el 80 % de los ejercicios. ¡Estoy orgulloso de tu esfuerzo!"
+        : `¡Cada intento te ayuda a aprender! Necesitas ${passingCorrect} respuestas correctas de ${total}. Vamos a repasar juntos.`;
+      const resultMati = find("result-mati");
+      if (resultMati) {
+        resultMati.src = `../assets/images/mati-${correct >= passingCorrect ? "congratulating" : "encouraging"}.png`;
+        resultMati.alt = correct >= passingCorrect ? "Mati celebra que alcanzaste la meta" : "Mati te anima a seguir practicando";
+      }
+      window.ArithmeticRecommendations?.render(find("review-topics"), find("review-links"), responses, lesson.id);
       if (lesson.deferFeedback) {
         for (const operation of ["addition", "subtraction", "multiplication", "division"]) {
           const attempts = responses.filter(response => response.question.operation === operation);

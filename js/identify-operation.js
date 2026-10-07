@@ -145,6 +145,7 @@
 
   const elements = {};
   let currentQuestions = [];
+  let responses = [];
   let currentIndex = 0;
   let correctAnswers = 0;
   let hasAnsweredCurrent = false;
@@ -272,6 +273,7 @@
   }
 
   function startAttempt() {
+    responses = [];
     currentQuestions = shuffleQuestions(questions);
     currentIndex = 0;
     correctAnswers = 0;
@@ -289,6 +291,7 @@
     const selectedOperation = option.dataset.operation;
     const question = currentQuestions[currentIndex];
     const isCorrect = selectedOperation === question.correctOperation;
+    responses.push({ question, isCorrect });
 
     option.classList.add("is-selected", isCorrect ? "is-correct" : "is-incorrect");
     option.setAttribute("aria-pressed", "true");
@@ -371,6 +374,9 @@
     elements.resultBadge.classList.toggle("is-earned", reachedGoal);
     setMatiPose(reachedGoal ? "resultCelebration" : "encouraging");
 
+    window.ArithmeticRecommendations?.render(
+      document.querySelector("[data-review-topics]"), document.querySelector("[data-review-links]"), responses
+    );
     showSection(elements.results);
     updateAllPointDisplays();
 

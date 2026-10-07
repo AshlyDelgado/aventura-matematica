@@ -45,6 +45,17 @@
 .activity-facts div { padding: 14px 8px; border-radius: 14px; background: white; text-align: center; }
 .activity-facts dt { min-height: 2.5em; font-size: .85rem; font-weight: 700; line-height: 1.25; }
 .activity-facts dd { margin: 8px 0 0; color: var(--dark-blue); font: 700 clamp(1rem, 4vw, 1.5rem) "Nunito", sans-serif; }
+.review-topics { padding: 24px; margin: 24px 0; border-radius: 20px; background: #fff5d7; }
+.review-topics[hidden] { display: none; }
+.review-topics h3 { margin-top: 0; font-family: "Fredoka", sans-serif; }
+.review-links { display: flex; flex-wrap: wrap; gap: 12px; }
+.review-topics .arithmetic-secondary { background: white; color: var(--dark-blue); }
+@media (max-width: 360px) {
+  .activity-facts { grid-template-columns: 1fr; }
+  .activity-facts div { display: flex; justify-content: space-between; align-items: center; gap: 12px; }
+  .activity-facts dt { min-height: 0; }
+  .activity-facts dd { margin: 0; }
+}
 .memory-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
 .arithmetic-panel .memory-card { min-height: 100px; font-size: clamp(1.2rem, 4vw, 1.8rem); background: var(--light-blue); color: var(--dark-blue); }
 .arithmetic-panel .memory-card.is-revealed { background: #fff5d7; }

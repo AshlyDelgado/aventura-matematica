@@ -12,6 +12,7 @@
     <script src="../js/navigation.js" defer></script>
     <script src="../js/final-assessment.js" defer></script>
     <script src="../js/arithmetic-visuals.js" defer></script>
+    <script src="../js/recommendations.js" defer></script>
     <script src="../js/arithmetic.js" defer></script>
 
   </head>
@@ -61,13 +62,13 @@
         </section>
         <section data-results aria-labelledby="result-title" hidden>
           <h2 id="result-title" tabindex="-1" data-result-title>Resultados</h2>
-          <p data-result-message></p>
+          <div class="arithmetic-mati-dialogue"><img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te acompaña al revisar los resultados" data-result-mati /><div class="arithmetic-speech-bubble"><span class="arithmetic-speaker">Mati</span><p class="arithmetic-feedback" data-result-message></p></div></div>
           <dl class="arithmetic-results">
             <div><dt>Correctas</dt><dd data-correct>0</dd></div>
             <div><dt>Incorrectas</dt><dd data-incorrect>0</dd></div>
             <div><dt>Porcentaje</dt><dd data-percent>0 %</dd></div>
           </dl>
-          <p data-points-earned></p><h3>Resultados por operación</h3><dl class="assessment-breakdown"><div><dt>Suma</dt><dd data-result-addition></dd></div><div><dt>Resta</dt><dd data-result-subtraction></dd></div><div><dt>Multiplicación</dt><dd data-result-multiplication></dd></div><div><dt>División</dt><dd data-result-division></dd></div></dl><details><summary>Revisar mis respuestas</summary><p class="assessment-review" data-answer-review></p></details>
+          <p data-points-earned></p><h3>Resultados por operación</h3><dl class="assessment-breakdown"><div><dt>Suma</dt><dd data-result-addition></dd></div><div><dt>Resta</dt><dd data-result-subtraction></dd></div><div><dt>Multiplicación</dt><dd data-result-multiplication></dd></div><div><dt>División</dt><dd data-result-division></dd></div></dl><details><summary>Revisar mis respuestas</summary><p class="assessment-review" data-answer-review></p></details><section class="review-topics" data-review-topics aria-labelledby="review-topics-title" hidden><h3 id="review-topics-title">¿Qué repasamos?</h3><p>Empieza por la operación que más necesita práctica.</p><div class="review-links" data-review-links></div></section>
           <div class="arithmetic-actions">
             <button type="button" data-retry>Practicar de nuevo</button>
             <button type="button" class="arithmetic-secondary" data-review>Ver instrucciones</button>
