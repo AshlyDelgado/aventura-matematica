@@ -4,7 +4,7 @@ Fecha: 7 de octubre de 2026.
 
 ## Pruebas de lógica
 
-Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 28 pruebas cubren:
+Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 33 pruebas cubren:
 
 - Respuestas y cantidades de los cuarenta ejercicios de las cuatro operaciones, antes y después de responder.
 - Meta del 80 %, reintentos sin duplicar puntos y puntos por mejora.
@@ -47,8 +47,9 @@ Se corrigieron tres problemas:
 
 Esta comprobación de contraste abarca los botones inspeccionados, no constituye una auditoría completa de conformidad de accesibilidad.
 
-Mejoras de interfaz que conviene considerar en una siguiente iteración:
+Mejoras de interfaz implementadas y verificadas:
 
-- Mostrar el mejor resultado por actividad en el menú, con una indicación clara de cuáles alcanzaron la meta.
-- Presentar las instrucciones de los retos en bloques cortos (cantidad de ejercicios, meta y puntaje) para reducir el desplazamiento en celular.
-- Dar más presencia a Mati en los resultados y ofrecer accesos directos a las operaciones que necesitan repaso.
+- El menú muestra el mejor resultado por actividad y cuántas de las ocho metas se alcanzaron. Las pruebas verifican los umbrales, el reinicio y el almacenamiento bloqueado o inválido.
+- Las instrucciones presentan cantidad de ejercicios, meta y puntaje en bloques cortos; en pantallas de hasta 360 píxeles se apilan para conservar la legibilidad.
+- Mati acompaña los resultados con felicitaciones o ánimo. Los enlaces de repaso consideran los errores de cada operación y priorizan su proporción; se ocultan cuando no hay errores. Las pruebas cubren las lecciones, identificación, número escondido y eliminación de recomendaciones de un intento anterior.
+- Se repitieron los recorridos completos en Chrome y la revisión de anchos de 320, 390, 768 y 1280 píxeles sin errores de JavaScript ni desbordamientos detectados.
