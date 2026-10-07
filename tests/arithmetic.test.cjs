@@ -84,8 +84,8 @@ test('leaving the adventure resets all activity records and points', () => {
   const context = vm.createContext({ window: { localStorage: { setItem: (key,value) => saved.set(key,value) } }, document: { addEventListener() {}, querySelectorAll: () => [] } });
   vm.runInContext(fs.readFileSync(path.join(root,'js','navigation.js'),'utf8'), context);
   context.window.AventuraMatematicaNavigation.resetStoredProgress();
-  assert.equal(saved.size,7);
-  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...[...Object.keys(operations),'final'].map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
+  assert.equal(saved.size,8);
+  for (const key of ['aventuraMatematicaPoints','aventuraMatematicaIdentifyBest', ...[...Object.keys(operations),'final','game-memory'].map(id => `aventuraMatematica${id}Best`)]) assert.equal(saved.get(key),'0');
 });
 
 test('final assessment defers feedback, requires 16 of 20 and reports all operations', () => {

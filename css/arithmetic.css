@@ -41,6 +41,12 @@
 .assessment-breakdown dt { font-weight: 800; }
 .assessment-breakdown dd { margin: 8px 0 0; }
 .assessment-review { white-space: pre-line; }
+.memory-board { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; }
+.arithmetic-panel .memory-card { min-height: 100px; font-size: clamp(1.2rem, 4vw, 1.8rem); background: var(--light-blue); color: var(--dark-blue); }
+.arithmetic-panel .memory-card.is-revealed { background: #fff5d7; }
+.arithmetic-panel .memory-card.is-matched { background: #d9f3e8; opacity: 1; border-color: #00897b; }
+.addition-practice-card + .addition-practice-card { margin-top: 20px; }
+@media (max-width: 480px) { .memory-board { grid-template-columns: repeat(3, 1fr); gap: 8px; } .arithmetic-panel .memory-card { padding: 10px 4px; min-height: 80px; } }
 .arithmetic-panel details { margin: 24px 0; }
 .arithmetic-panel summary { cursor: pointer; font-weight: 800; padding: 12px 0; }
 .quantity-visual { margin: 20px 0; }
