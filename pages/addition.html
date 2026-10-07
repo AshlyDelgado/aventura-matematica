@@ -13,27 +13,39 @@
     <script src="../js/addition.js" defer></script>
     <script src="../js/arithmetic.js" defer></script>
   </head>
-  <body>
+  <body class="addition-page">
     <main class="arithmetic-shell">
       <div class="arithmetic-panel">
         <header>
           <nav class="arithmetic-topbar" aria-label="Navegación principal">
-            <strong>Aventura Matemática</strong>
+            <strong class="addition-brand">Aventura <span>Matemática</span></strong>
             <a href="menu.html" data-outbound>Menú</a>
-            <span>Puntaje: <strong data-points>0</strong></span>
+            <span class="addition-score">Puntaje: <strong data-points>0</strong></span>
           </nav>
-          <h1>Sumar</h1>
+          <div class="addition-heading">
+            <span class="addition-icon" aria-hidden="true"></span>
+            <div><p class="addition-eyebrow">Junta, cuenta y descubre</p><h1>La aventura de sumar</h1></div>
+          </div>
         </header>
         <section data-lesson aria-labelledby="lesson-title">
-          <h2 id="lesson-title" tabindex="-1" data-lesson-title>Aprendamos a sumar</h2>
-          <p>Sumar es juntar cantidades para encontrar un total.</p>
+          <div class="addition-welcome">
+            <div class="addition-welcome-copy">
+              <p class="addition-eyebrow">Mati te acompaña</p>
+              <h2 id="lesson-title" tabindex="-1" data-lesson-title>¡Aprendamos a sumar!</h2>
+              <p>Sumar es juntar cantidades para encontrar un total. Vamos a descubrirlo juntos, paso a paso.</p>
+            </div>
+            <div class="addition-fox"><img src="../assets/images/mati.png" alt="Mati, el zorrito de Aventura Matemática, te da la bienvenida" /></div>
+          </div>
           <article class="arithmetic-example" aria-labelledby="example-title">
             <h3 id="example-title">Un ejemplo paso a paso</h3>
             <p>Tienes 5 manzanas y recibes 3 más. ¿Cuántas tienes ahora?</p>
             <ol><li>Empieza con las 5 manzanas que tenías.</li><li>Agrega las 3 nuevas: cuenta 6, 7 y 8.</li><li>El total es 8. Por eso, 5 + 3 = 8.</li></ol>
           </article>
-          <p>Ahora resuelve 10 ejercicios. Necesitas 8 respuestas correctas para alcanzar el 80 %. Cada respuesta correcta vale 10 puntos; al repetir, solo sumas puntos nuevos si mejoras tu mejor resultado.</p>
-          <button type="button" data-start>Comenzar práctica</button>
+          <div class="addition-practice-card">
+            <div><h3>¿Listo para tu aventura?</h3><p>Resuelve 10 ejercicios. ¡Con 8 respuestas correctas alcanzas la meta!</p></div>
+            <button type="button" data-start>¡Vamos a practicar!</button>
+            <p class="addition-points-note">Cada acierto vale 10 puntos. Al repetir, sumas puntos nuevos cuando mejoras tu mejor resultado.</p>
+          </div>
         </section>
         <section data-practice aria-labelledby="question-title" hidden>
           <div class="arithmetic-status"><h2 id="question-title" data-counter></h2></div>

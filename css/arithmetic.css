@@ -26,3 +26,40 @@
 .arithmetic-panel dialog { max-width: min(90vw, 460px); border: 0; border-radius: 20px; padding: 28px; color: var(--dark-blue); }
 .arithmetic-panel dialog::backdrop { background: rgb(23 50 77 / 60%); }
 @media (max-width: 480px) { .arithmetic-shell { margin: 16px auto; } .arithmetic-results { grid-template-columns: 1fr; } .arithmetic-answer { align-items: stretch; flex-direction: column; } }
+
+/* Addition uses the project's original character and operation icon sheet. */
+.addition-page .arithmetic-panel { border: 4px solid white; background: linear-gradient(180deg, #fff 65%, #f5fbfc); }
+.addition-page .arithmetic-topbar { padding-bottom: 20px; }
+.addition-brand { color: var(--turquoise); font-family: "Fredoka", sans-serif; font-size: 1.3rem; }
+.addition-brand span { color: var(--dark-blue); }
+.addition-page .arithmetic-topbar a { text-decoration: none; font-weight: 800; padding: 10px 18px; border-radius: 12px; background: var(--light-blue); }
+.addition-score { background: #fff4cb; padding: 10px 16px; border-radius: 12px; }
+.addition-heading { display: flex; align-items: center; gap: 18px; margin: 28px 0; }
+.addition-page .addition-heading h1 { margin: 4px 0 0; font-size: clamp(1.8rem, 5vw, 2.7rem); }
+.addition-page .addition-eyebrow { margin: 0; color: var(--turquoise); font-size: .85rem; font-weight: 800; letter-spacing: .06em; text-transform: uppercase; }
+.addition-icon { flex: 0 0 80px; width: 80px; height: 80px; border-radius: 50%; background: url("../assets/images/operation-icons.png") -401px -81px / 1000px 375px no-repeat; }
+.addition-welcome { display: grid; grid-template-columns: 1fr 200px; align-items: center; gap: 24px; padding: 24px 30px; background: var(--light-blue); border-radius: 24px; border: 2px solid #d7eeef; }
+.addition-welcome h2 { margin: 8px 0 12px; font-size: clamp(1.5rem, 4vw, 2rem); }
+.addition-welcome-copy p:last-child { margin-bottom: 0; }
+.addition-fox { width: 200px; height: 230px; overflow: hidden; position: relative; }
+.addition-fox img { position: absolute; width: 800px; max-width: none; height: 300px; left: -322px; top: -34px; }
+.addition-page .arithmetic-example { background: white; border: 2px solid #d7eeef; border-left: 6px solid var(--turquoise); border-radius: 20px; padding: 24px; }
+.addition-page .arithmetic-example h3 { margin-top: 0; font-family: "Fredoka", sans-serif; font-size: 1.4rem; }
+.addition-page .arithmetic-example ol { padding-left: 28px; }
+.addition-page .arithmetic-example li { padding-left: 8px; }
+.addition-page .arithmetic-example li::marker { color: var(--turquoise); font-weight: 800; }
+.addition-practice-card { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 16px; padding: 24px; border-radius: 20px; background: #fff5d7; }
+.addition-practice-card h3 { font: 600 1.4rem "Fredoka", sans-serif; margin: 0 0 8px; }
+.addition-practice-card p { margin: 0; }
+.addition-page .addition-points-note { flex-basis: 100%; font-size: .9rem; }
+.addition-page button { box-shadow: 0 4px 0 #006c62; transition: background-color 150ms ease; }
+.addition-page button:hover:not(:disabled) { background: #00776c; }
+.addition-page button.arithmetic-secondary:hover { background: var(--light-blue); }
+@media (max-width: 600px) {
+  .addition-welcome { grid-template-columns: 1fr; padding: 20px; gap: 8px; }
+  .addition-fox { justify-self: center; }
+  .addition-heading { gap: 12px; }
+  .addition-icon { flex-basis: 64px; width: 64px; height: 64px; background-size: 800px 300px; background-position: -321px -65px; }
+  .addition-practice-card button { width: 100%; }
+  .addition-brand { flex-basis: 100%; }
+}
