@@ -1,0 +1,28 @@
+.arithmetic-shell { width: min(100% - 32px, 960px); margin: 32px auto; }
+.arithmetic-panel { padding: clamp(20px, 5vw, 48px); background: var(--white); border-radius: 28px; box-shadow: var(--shadow); }
+.arithmetic-topbar, .arithmetic-status, .arithmetic-actions { display: flex; flex-wrap: wrap; align-items: center; gap: 16px; justify-content: space-between; }
+.arithmetic-topbar { border-bottom: 2px solid var(--light-blue); padding-bottom: 16px; }
+.arithmetic-panel h1, .arithmetic-panel h2 { font-family: "Fredoka", "Trebuchet MS", sans-serif; }
+.arithmetic-panel h1 { font-size: clamp(2rem, 6vw, 3rem); }
+.arithmetic-panel p, .arithmetic-panel li { font-size: 1.125rem; line-height: 1.6; }
+.arithmetic-example { padding: 20px; background: var(--light-blue); border-left: 5px solid var(--turquoise); border-radius: 12px; margin: 24px 0; }
+.arithmetic-example li + li { margin-top: 12px; }
+.arithmetic-expression { font-size: clamp(2rem, 8vw, 3.5rem) !important; font-weight: 800; text-align: center; }
+.arithmetic-mati { width: 130px; margin: 20px auto; }
+.arithmetic-panel button, .arithmetic-button { display: inline-block; font: 800 1rem "Nunito", sans-serif; padding: 14px 22px; border: 2px solid var(--turquoise); border-radius: 14px; background: var(--turquoise); color: white; cursor: pointer; text-decoration: none; }
+.arithmetic-panel .arithmetic-secondary { background: white; color: var(--dark-blue); }
+.arithmetic-panel button:disabled { opacity: .55; cursor: default; }
+.arithmetic-panel :focus-visible { outline: 3px solid var(--orange); outline-offset: 4px; }
+.arithmetic-panel [hidden] { display: none !important; }
+.arithmetic-answer { display: flex; flex-wrap: wrap; align-items: end; gap: 16px; }
+.arithmetic-answer label { display: grid; gap: 8px; font-weight: 800; }
+.arithmetic-answer input { width: min(100%, 220px); padding: 12px; border: 2px solid var(--dark-blue); border-radius: 12px; font: inherit; font-size: 1.5rem; }
+.arithmetic-panel progress { width: 100%; height: 20px; accent-color: var(--turquoise); }
+.arithmetic-feedback { min-height: 60px; padding: 16px; border-radius: 12px; background: var(--light-blue); }
+.arithmetic-feedback[data-correct="false"] { background: #fff3d3; }
+.arithmetic-results { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+.arithmetic-results div { padding: 16px; background: var(--light-blue); border-radius: 12px; text-align: center; }
+.arithmetic-results dd { margin: 8px 0 0; font-size: 2rem; font-weight: 800; }
+.arithmetic-panel dialog { max-width: min(90vw, 460px); border: 0; border-radius: 20px; padding: 28px; color: var(--dark-blue); }
+.arithmetic-panel dialog::backdrop { background: rgb(23 50 77 / 60%); }
+@media (max-width: 480px) { .arithmetic-shell { margin: 16px auto; } .arithmetic-results { grid-template-columns: 1fr; } .arithmetic-answer { align-items: stretch; flex-direction: column; } }
