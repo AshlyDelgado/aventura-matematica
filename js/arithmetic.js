@@ -31,7 +31,7 @@
       [intro, quiz, results].forEach((item) => { item.hidden = item !== section; });
     };
     const pose = (name, alt) => {
-      mati.src = `../assets/images/mati${name ? `-${name}` : ""}.png`;
+      mati.src = `../assets/images/mati-${name || "encouraging"}.png`;
       mati.alt = alt;
     };
     const render = () => {
@@ -46,7 +46,7 @@
       input.disabled = false;
       submit.disabled = false;
       next.hidden = true;
-      feedback.textContent = "";
+      feedback.textContent = "¡Puedes hacerlo! Cuenta los objetos y escribe tu respuesta. Yo te acompaño.";
       feedback.removeAttribute("data-correct");
       next.textContent = index === total - 1 ? "Ver resultados" : "Siguiente ejercicio";
       pose("", "Mati acompaña el ejercicio");

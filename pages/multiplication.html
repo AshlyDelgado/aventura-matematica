@@ -39,7 +39,7 @@
         <section data-practice aria-labelledby="question-title" hidden>
           <div class="arithmetic-status"><h2 id="question-title" data-counter></h2></div>
           <progress data-progress max="10" value="0" aria-label="Ejercicios respondidos"></progress>
-          <img class="arithmetic-mati" src="../assets/images/mati.png" alt="Mati acompaña el ejercicio" data-mati />
+
           <p data-question></p>
           <div class="quantity-visual" data-quantity-visual role="group" aria-label="Objetos del ejercicio"></div>
           <p class="arithmetic-expression" data-expression></p>
@@ -50,7 +50,13 @@
             <button type="submit" data-check>Comprobar</button>
           </form>
           <p id="answer-help">Escribe un número entero mayor o igual a cero.</p>
-          <p id="feedback" class="arithmetic-feedback" aria-live="polite" data-feedback></p>
+          <section class="arithmetic-mati-dialogue" aria-label="Mati te acompaña">
+            <img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te anima a resolver el ejercicio" data-mati />
+            <div class="arithmetic-speech-bubble">
+              <span class="arithmetic-speaker">Mati</span>
+              <p id="feedback" class="arithmetic-feedback" aria-live="polite" aria-atomic="true" data-feedback></p>
+            </div>
+          </section>
           <div class="arithmetic-actions">
             <button type="button" data-next hidden>Siguiente ejercicio</button>
             <button class="arithmetic-secondary" type="button" data-leave>Volver al menú</button>
