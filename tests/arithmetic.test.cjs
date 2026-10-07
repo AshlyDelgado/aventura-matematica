@@ -61,7 +61,7 @@ for (const [id,calculate] of Object.entries(operations)) {
     assert.equal(app.storage.get('aventuraMatematicaPoints'),'80');
     app.finish(10);
     assert.equal(app.storage.get('aventuraMatematicaPoints'),'100');
-    assert.equal(app.node('incorrect').textContent,0);
+    assert.equal(app.node('result-incorrect').textContent,0);
     assert.equal(app.node('results').hidden,false);
   });
   test(`${id}: invalid input and duplicate answers do not advance or award points`, () => {

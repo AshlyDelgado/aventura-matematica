@@ -105,8 +105,8 @@
       if (correct > best) write(bestKey, correct);
       if (gained > 0) write(pointsKey, read(pointsKey) + gained);
       find("result-title").textContent = correct >= passingCorrect ? "¡Objetivo alcanzado!" : "¡Sigue practicando!";
-      find("correct").textContent = correct;
-      find("incorrect").textContent = total - correct;
+      find("result-correct").textContent = correct;
+      find("result-incorrect").textContent = total - correct;
       find("percent").textContent = `${Math.round(correct / total * 100)} %`;
       find("points-earned").textContent = `${correct * 10} puntos en este intento. ${gained} puntos nuevos para tu aventura.`;
       find("result-message").textContent = correct >= passingCorrect
