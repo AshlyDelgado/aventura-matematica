@@ -1,5 +1,6 @@
 :root {
   --turquoise: #00897b;
+  --action-turquoise: #00776c;
   --light-blue: #eaf7fb;
   --yellow: #ffd54f;
   --orange: #f28c28;
@@ -1082,7 +1083,7 @@ a {
 
 .menu-exit-confirm {
   color: var(--white);
-  background: var(--turquoise);
+  background: var(--action-turquoise);
 }
 
 .menu-exit-cancel {
@@ -1830,7 +1831,7 @@ a.future-card:focus-visible { outline: 3px solid var(--orange); outline-offset: 
 
 .identify-primary-button {
   color: var(--white);
-  background: var(--turquoise);
+  background: var(--action-turquoise);
   cursor: pointer;
 }
 
@@ -1964,7 +1965,7 @@ dialog.identify-menu-modal:not([open]) { display: none; }
 
 .identify-menu-confirm {
   color: var(--white);
-  background: var(--turquoise);
+  background: var(--action-turquoise);
 }
 
 .identify-menu-cancel {
