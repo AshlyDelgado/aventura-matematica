@@ -4,16 +4,19 @@ Fecha: 7 de octubre de 2026.
 
 ## Pruebas de lógica
 
-Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 52 pruebas cubren:
+Ejecutar `node tests/run.cjs` con Node.js 22 o posterior. Las 66 pruebas cubren:
 
-- Respuestas y cantidades de los cuarenta ejercicios de las cuatro operaciones, antes y después de responder.
+- Respuestas y cantidades de los ciento sesenta ejercicios de las cuatro operaciones (cuatro niveles de diez ejercicios por operación), antes y después de responder.
+- Progresión por niveles: la suma empieza con 3 + 1 = 4, ningún número de dos dígitos aparece antes del tercer nivel de suma o resta, la dificultad no baja de un nivel al siguiente y los dibujos usan el singular con una sola calcomanía.
+- Mensaje de resultados: dice el resultado real ("¡Perfecto! Resolviste correctamente los 10 ejercicios" con todo bien; "8 de 10 ejercicios (80 %) y la meta era el 80 %" al aprobar sin ser perfecto) en los módulos, la evaluación final, el juego y OA1, en lugar de repetir "al menos el 80 %".
+- Bloqueo de niveles: solo el nivel 1 está abierto; cada uno se abre al superar el anterior (ocho de diez), un nivel cerrado no se puede elegir, con el almacenamiento bloqueado los niveles siguen abriéndose en orden durante la visita, el nivel recomendado es el primero sin superar, cada nivel guarda su propio mejor resultado y superar un nivel ofrece el siguiente.
 - Meta del 80 %, reintentos sin duplicar puntos y puntos por mejora.
 - Rechazo de entradas vacías, negativas, decimales o inválidas; bloqueo de envíos repetidos.
 - Funcionamiento sin almacenamiento y reinicio global de los mejores resultados.
 - Conteo de manzanas y ejemplos de resta, multiplicación y división, con avance y reinicio.
 - Conservación de las doce fichas entre la reserva y las personas durante el ejemplo de división.
 - Evaluación final: cinco ejercicios por operación, corrección diferida, dieciséis aciertos de veinte y resultados por operación.
-- Número escondido: soluciones matemáticas, meta de diez aciertos de doce y puntajes.
+- Número escondido: soluciones matemáticas, meta de diez aciertos de doce y puntajes. Cada ejercicio es una situación de un solo paso (tres por operación) que nombra los dos números conocidos, pregunta por el desconocido y no revela la respuesta; su lectura en voz alta termina en la pregunta.
 - Juego de parejas: coincidencias, errores, continuación explícita y finalización.
 - Foco en el enunciado al comenzar un ejercicio y en el mensaje de Mati al responder.
 - OA1: meta del 80 %, puntajes por mejora, cancelación del diálogo de salida y avance de la barra de progreso para tecnologías de apoyo.
@@ -88,3 +91,30 @@ Se corrigieron cinco problemas:
 - Las tarjetas del menú tenían un nombre accesible ("Practicar suma") distinto del texto visible ("Sumar…"): se quitó para que el nombre salga del contenido, que ya incluye el mejor resultado.
 
 Resultado: cero violaciones en las 29 pantallas y estados. Todos los textos cumplen 4,5:1 (3:1 en texto grande), salvo los de controles deshabilitados en ese momento (por ejemplo "Comprobar" después de responder), que el estándar exime. El recorrido completo de 116 comprobaciones se repitió en Chrome y en Microsoft Edge con los mismos resultados.
+
+## Revisión de niveles del 8 de octubre de 2026
+
+Observación de la profesora: los módulos debían avanzar por niveles, sin empezar con sumas de dos cifras, y el nivel fácil debía ser realmente fácil (por ejemplo, 3 + 1 = 4), con los niveles siguientes cerrados hasta aprobar los primeros. Cada módulo de operación pasó de un solo grupo de diez ejercicios mezclados a cuatro niveles de diez ejercicios, que se abren en orden:
+
+| Operación | Nivel 1 · Fácil | Nivel 2 · Medio | Nivel 3 · Difícil | Nivel 4 · Experto |
+| --- | --- | --- | --- | --- |
+| Suma | sumas pequeñas (3 + 1 = 4; totales hasta 8) | un dígito + un dígito (hasta 18) | dos dígitos + un dígito | dos dígitos + dos dígitos |
+| Resta | restas pequeñas (desde 8 o menos) | un dígito − un dígito | dos dígitos − un dígito | dos dígitos − dos dígitos |
+| Multiplicación | tablas del 2 y del 5 | tablas del 3 y del 4 | tablas del 6 y del 7 | tablas del 8 y del 9 |
+| División | tablas del 2 y del 5 | tablas del 3 y del 4 | tablas del 6 y del 7 | tablas del 8 y del 9 |
+
+Pruebas en Chrome real (perfil temporal y servidor HTTP local, anchos de 1280 y 390 píxeles), 63 comprobaciones aprobadas y sin errores de JavaScript. En cada una de las cuatro operaciones se verificó:
+
+- El selector muestra los cuatro niveles con su descripción. Solo el nivel 1 está abierto, preseleccionado y recomendado ("Empieza por aquí"); los otros tres aparecen con candado ("Se abre al superar el nivel…") y hacer clic en ellos no los selecciona.
+- Un intento de siete aciertos no supera el nivel, no abre el siguiente ni ofrece avanzar; "Repetir este nivel" reinicia el mismo nivel. Con diez aciertos se abre solo el nivel siguiente y aparece "Pasar al nivel Medio", que lo inicia de inmediato.
+- Al recargar, el nivel superado aparece con su resultado, se preselecciona el primero sin superar y los posteriores siguen cerrados. Se recorrió la cadena completa (Medio, Difícil y Experto); el nivel 4 cierra con el mensaje de último nivel y sin botón de siguiente, y con los cuatro aprobados todos quedan abiertos.
+- El menú muestra "Niveles superados: 4 de 4" y la meta de la operación solo cuenta al superar los cuatro. "Salir" reinicia los mejores resultados de todos los niveles y vuelve a cerrar los niveles 2 a 4.
+- Sin desbordamiento horizontal del selector en 390 píxeles. Se revisaron capturas del selector con niveles cerrados, de los resultados y de los ejercicios.
+
+**Sin cambios:** la evaluación final y las situaciones de "Identifica la operación" conservan sus ejercicios; la evaluación final sigue mezclando operaciones y cantidades de uno y dos dígitos, porque evalúa todo lo aprendido.
+
+## Revisión del número escondido del 8 de octubre de 2026
+
+El objetivo OA3 (problemas contextualizados de un solo paso) cita "actividades de refuerzo", y el juego "El número escondido" mostraba solo ecuaciones como `5 + ? = 8` con el mismo enunciado genérico. Ahora cada uno de sus doce ejercicios es un problema contextualizado: por ejemplo, "Tienes 5 calcomanías y recibes algunas más. Ahora tienes 8. ¿Cuántas calcomanías recibiste?", con la ecuación y las fichas de apoyo debajo. Hay tres situaciones por operación; las respuestas, la meta (diez de doce) y los puntos no cambiaron.
+
+Se recorrió el juego completo en Chrome real (1280 y 390 píxeles): las doce situaciones aparecen con su ecuación, se completan con el 100 % y no hay desbordamiento horizontal.
