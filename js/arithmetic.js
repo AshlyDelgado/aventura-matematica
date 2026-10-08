@@ -3,10 +3,20 @@
   "use strict";
   const lesson = window.ArithmeticLesson;
   if (!lesson) return;
-  const total = lesson.exercises.length;
-  const passingCorrect = Math.ceil(total * 0.8);
+  // The four operation modules practice by level (easy to hard); the other activities have a single set of exercises.
+  const levels = lesson.levels || null;
   const pointsKey = "aventuraMatematicaPoints";
-  const bestKey = `aventuraMatematica${lesson.id}Best`;
+  const goalFor = (count) => Math.ceil(count * 0.8);
+  const keyFor = (number) => `aventuraMatematica${lesson.id}${levels ? `-${number}` : ""}Best`;
+  let exercises, total, passingCorrect, bestKey, level = 1;
+  const useLevel = (number) => {
+    level = number;
+    exercises = levels ? levels[number - 1].exercises : lesson.exercises;
+    total = exercises.length;
+    passingCorrect = goalFor(total);
+    bestKey = keyFor(number);
+  };
+  useLevel(1);
   const read = (key) => {
     try {
       const value = Number(localStorage.getItem(key));
@@ -16,6 +26,8 @@
   const write = (key, value) => {
     try { localStorage.setItem(key, String(value)); } catch { /* Practice works without storage. */ }
   };
+  // Best results of this visit, so levels still unlock in order when the browser blocks storage.
+  const visitBest = {};
   document.addEventListener("DOMContentLoaded", () => {
     const find = (name) => document.querySelector(`[data-${name}]`);
     const intro = find("lesson");
@@ -32,6 +44,38 @@
     const show = (section) => {
       [intro, quiz, results].forEach((item) => { item.hidden = item !== section; });
     };
+    const levelName = () => levels ? levels[level - 1].name : "";
+    const levelInput = (number) => document.querySelector(`[data-level="${number}"]`);
+    const levelText = (part, number) => document.querySelector(`[data-level-${part}="${number}"]`);
+    const bestAt = (number) => Math.min(levels[number - 1].exercises.length, Math.max(read(keyFor(number)), visitBest[keyFor(number)] || 0));
+    const passedAt = (number) => bestAt(number) >= goalFor(levels[number - 1].exercises.length);
+    // Levels open one at a time: the first is always open and each next one opens when the one before is passed.
+    const unlockedAt = (number) => number === 1 || passedAt(number - 1);
+    // The first level whose goal is not reached yet (always open); 0 once the learner has passed them all.
+    const pendingLevel = () => levels.findIndex((_, index) => !passedAt(index + 1)) + 1;
+    const selectLevel = (number) => {
+      if (!unlockedAt(number)) return;
+      useLevel(number);
+      levelInput(number).checked = true;
+      find("start").textContent = `¡Vamos a practicar el nivel ${levelName()}!`;
+    };
+    const refreshLevels = () => {
+      if (!levels) return;
+      const pending = pendingLevel();
+      levels.forEach((item, index) => {
+        const number = index + 1, best = bestAt(number), count = item.exercises.length;
+        const open = unlockedAt(number);
+        levelText("name", number).textContent = `Nivel ${number} · ${item.name}`;
+        levelText("description", number).textContent = item.description;
+        levelInput(number).dataset.passed = String(passedAt(number));
+        levelInput(number).dataset.locked = String(!open);
+        levelInput(number).disabled = !open;
+        levelText("status", number).textContent = passedAt(number) ? `¡Superado! ${best} de ${count}`
+          : !open ? `🔒 Se abre al superar el nivel ${number - 1}`
+          : best > 0 ? `Tu mejor resultado: ${best} de ${count}`
+          : number === pending && number === 1 ? "Empieza por aquí" : "Sigue con este nivel";
+      });
+    };
     const pose = (name, alt) => {
       mati.src = `../assets/images/mati-${name || "encouraging"}.png`;
       mati.alt = alt;
@@ -39,7 +83,7 @@
     const render = () => {
       answered = false;
       const question = questions[index];
-      find("counter").textContent = `Ejercicio ${index + 1} de ${total}`;
+      find("counter").textContent = `${levels ? `Nivel ${levelName()} · ` : ""}Ejercicio ${index + 1} de ${total}`;
       find("progress").value = index;
       find("question").textContent = question.statement;
       find("expression").textContent = question.expression || `${question.a} ${question.symbol || lesson.symbol} ${question.b} = ?`;
@@ -58,7 +102,7 @@
     };
     const start = () => {
       window.MatiAudio?.stopSpeaking();
-      questions = [...lesson.exercises];
+      questions = [...exercises];
       for (let i = questions.length - 1; i > 0; i -= 1) {
         const j = Math.floor(Math.random() * (i + 1));
         [questions[i], questions[j]] = [questions[j], questions[i]];
@@ -108,6 +152,7 @@
       if (index < total - 1) { index += 1; render(); return; }
       const best = Math.min(total, read(bestKey));
       const gained = Math.max(0, correct - best) * 10;
+      visitBest[bestKey] = Math.max(visitBest[bestKey] || 0, correct);
       if (correct > best) write(bestKey, correct);
       if (gained > 0) write(pointsKey, read(pointsKey) + gained);
       find("result-title").textContent = correct >= passingCorrect ? "¡Objetivo alcanzado!" : "¡Sigue practicando!";
@@ -115,9 +160,20 @@
       find("result-incorrect").textContent = total - correct;
       find("percent").textContent = `${Math.round(correct / total * 100)} %`;
       find("points-earned").textContent = `${correct * 10} puntos en este intento. ${gained} puntos nuevos para tu aventura.`;
-      find("result-message").textContent = correct >= passingCorrect
-        ? "¡Lo lograste! Resolviste correctamente al menos el 80 % de los ejercicios. ¡Estoy orgulloso de tu esfuerzo!"
-        : `¡Cada intento te ayuda a aprender! Necesitas ${passingCorrect} respuestas correctas de ${total}. Vamos a repasar juntos.`;
+      // The message states the real result: a perfect attempt is not described as "at least 80 %".
+      const lastLevel = levels && level === levels.length ? " ¡Completaste el último nivel!" : "";
+      find("result-message").textContent = correct === total
+        ? `¡Perfecto! Resolviste correctamente los ${total} ejercicios. ¡Estoy muy orgulloso de tu esfuerzo!${lastLevel}`
+        : correct >= passingCorrect
+          ? `¡Lo lograste! Resolviste correctamente ${correct} de ${total} ejercicios (${Math.round(correct / total * 100)} %) y la meta era el 80 %. ¡Estoy orgulloso de tu esfuerzo!${lastLevel}`
+          : `¡Cada intento te ayuda a aprender! Necesitas ${passingCorrect} respuestas correctas de ${total}. Vamos a repasar juntos.`;
+      if (levels) {
+        const nextLevel = find("next-level");
+        find("result-level").textContent = `Nivel ${level} · ${levelName()}`;
+        nextLevel.hidden = !(correct >= passingCorrect && level < levels.length);
+        if (!nextLevel.hidden) nextLevel.textContent = `Pasar al nivel ${levels[level].name}`;
+        refreshLevels();
+      }
       const resultMati = find("result-mati");
       if (resultMati) {
         resultMati.src = `../assets/images/mati-${correct >= passingCorrect ? "congratulating" : "encouraging"}.png`;
@@ -141,6 +197,12 @@
       find("result-title").focus();
       window.MatiAudio?.say(find("result-message"), { delay: 900 });
     });
+    if (levels) {
+      levels.forEach((_, index) => levelInput(index + 1).addEventListener("change", () => selectLevel(index + 1)));
+      refreshLevels();
+      selectLevel(pendingLevel() || levels.length);
+      find("next-level").addEventListener("click", () => { selectLevel(level + 1); start(); });
+    }
     find("start").addEventListener("click", start);
     find("retry").addEventListener("click", start);
     find("review").addEventListener("click", () => { window.MatiAudio?.stopSpeaking(); show(intro); find("lesson-title").focus(); });

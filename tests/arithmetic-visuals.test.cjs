@@ -7,12 +7,14 @@ const root = path.join(__dirname, '..');
 const element = () => ({ children: [], style: { setProperty() {} }, setAttribute() {}, append(...items) { this.children.push(...items); }, replaceChildren(fragment) { this.children = fragment.children; } });
 
 for (const operation of ['addition','subtraction','multiplication','division']) {
-  test(`${operation}: visual objects match all ten exercises before and after answering`, () => {
+  test(`${operation}: visual objects match all forty exercises of the four levels before and after answering`, () => {
     const context = vm.createContext({ window: {}, document: { createElement: element, createDocumentFragment: element } });
     vm.runInContext(fs.readFileSync(path.join(root,'js',`${operation}.js`),'utf8'),context);
     vm.runInContext(fs.readFileSync(path.join(root,'js','arithmetic-visuals.js'),'utf8'),context);
     const visuals = context.window.ArithmeticVisuals;
-    for (const q of context.window.ArithmeticLesson.exercises) {
+    const exercises = context.window.ArithmeticLesson.levels.flatMap(level => level.exercises);
+    assert.equal(exercises.length,40);
+    for (const q of exercises) {
       for (const answered of [false,true]) {
         const groups = visuals.describe(operation,q,answered);
         const container = element();
@@ -45,3 +47,11 @@ for (const operation of ['addition','subtraction','multiplication','division']) 
     }
   });
 }
+
+test('addition labels use the singular for one sticker', () => {
+  const context = vm.createContext({ window: {}, document: { createElement: element, createDocumentFragment: element } });
+  vm.runInContext(fs.readFileSync(path.join(root,'js','arithmetic-visuals.js'),'utf8'),context);
+  const { describe } = context.window.ArithmeticVisuals;
+  assert.deepEqual(Array.from(describe('addition',{ a: 3, b: 1 }),group => group.label),['Ya tienes 3 calcomanías','Recibes 1 calcomanía más']);
+  assert.deepEqual(Array.from(describe('addition',{ a: 1, b: 4 }),group => group.label),['Ya tienes 1 calcomanía','Recibes 4 calcomanías más']);
+});

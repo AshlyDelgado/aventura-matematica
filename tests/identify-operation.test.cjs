@@ -46,6 +46,16 @@ test('OA1 measures the 80 percent goal and awards only improvements',()=>{
   assert.equal(app.saved.get('aventuraMatematicaPoints'),'100');
   assert.equal(app.node('[data-result-incorrect]').textContent,0);
 });
+test('OA1 result message states the real result instead of the 80 percent goal',()=>{
+  const app=challenge();
+  const message=()=>app.node('[data-result-message]').textContent;
+  app.finish(10);
+  assert.equal(message(),'¡Perfecto! Identificaste correctamente la operación en las 10 situaciones.');
+  app.finish(8);
+  assert.equal(message(),'Identificaste correctamente la operación en 8 de 10 situaciones (80 %) y la meta era el 80 %.');
+  app.finish(7);
+  assert.match(message(),/Revisa las pistas/);
+});
 test('OA1 native exit dialog opens and cancellation preserves the attempt',()=>{
   const app=challenge();
   app.node('[data-start-challenge]').click();

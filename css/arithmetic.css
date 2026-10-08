@@ -170,3 +170,22 @@
 .missing-page .addition-icon { background: #fff4cb url("../assets/images/reward-icons.png") no-repeat; }
 .final-page .addition-icon { background-size: 395% auto; background-position: 81.8% 56.4%; }
 .missing-page .addition-icon { background-size: 471% auto; background-position: 49.2% 44.1%; }
+
+/* Niveles de práctica: fácil, medio y difícil */
+.level-picker { flex-basis: 100%; min-width: 0; margin: 0; padding: 0; border: 0; }
+.level-picker legend { padding: 0; margin-bottom: 10px; font: 600 1.2rem "Fredoka", sans-serif; }
+.level-options { display: grid; grid-template-columns: repeat(auto-fit, minmax(190px, 1fr)); gap: 12px; }
+.level-option { position: relative; display: block; cursor: pointer; }
+.level-option input { position: absolute; inset: 0; width: 100%; height: 100%; margin: 0; opacity: 0; cursor: pointer; }
+.level-option-body { display: grid; align-content: start; gap: 4px; box-sizing: border-box; height: 100%; padding: 14px; border: 3px solid transparent; border-radius: 16px; background: white; }
+.level-option-body strong { font: 600 1.15rem "Fredoka", sans-serif; }
+.level-option-body span { font-size: .95rem; font-weight: 700; }
+.level-option-body em { font-size: .85rem; font-style: normal; font-weight: 800; color: #4a5a6a; }
+.level-option input:checked + .level-option-body { border-color: var(--action-turquoise); background: var(--light-blue); box-shadow: 0 0 0 3px #b8e4df; }
+.level-option input:disabled { cursor: not-allowed; }
+.level-option input:disabled + .level-option-body { background: #f1f4f6; color: #4a5a6a; border-style: dashed; border-color: #b7c4cf; }
+.level-option input[data-passed="true"] + .level-option-body em { color: #00695c; }
+.level-option input[data-passed="true"] + .level-option-body strong::after { content: " ✓"; content: " ✓" / ""; color: #00695c; }
+.level-option input:focus-visible + .level-option-body { outline: 3px solid var(--orange); outline-offset: 4px; }
+.arithmetic-panel .result-level { margin: 0 0 12px; font-weight: 800; color: var(--action-turquoise); }
+@media (max-width: 600px) { .level-options { grid-template-columns: 1fr; } }

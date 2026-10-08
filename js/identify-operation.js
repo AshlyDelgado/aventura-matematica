@@ -377,9 +377,12 @@
         : "No ganaste puntos nuevos esta vez porque ya habías alcanzado ese resultado.";
 
     elements.resultStatus.textContent = reachedGoal ? "¡Objetivo alcanzado!" : "Sigue practicando";
-    elements.resultMessage.textContent = reachedGoal
-      ? "Identificaste correctamente las operaciones en al menos el 80 % de las situaciones."
-      : "Revisa las pistas e inténtalo nuevamente. Cada intento te ayuda a aprender.";
+    // The message states the real result: a perfect attempt is not described as "at least 80 %".
+    elements.resultMessage.textContent = correctAnswers === TOTAL_QUESTIONS
+      ? `¡Perfecto! Identificaste correctamente la operación en las ${TOTAL_QUESTIONS} situaciones.`
+      : reachedGoal
+        ? `Identificaste correctamente la operación en ${correctAnswers} de ${TOTAL_QUESTIONS} situaciones (${Math.round(percentage)} %) y la meta era el 80 %.`
+        : "Revisa las pistas e inténtalo nuevamente. Cada intento te ayuda a aprender.";
     elements.resultBadge.classList.toggle("is-earned", reachedGoal);
     setMatiPose(reachedGoal ? "resultCelebration" : "encouraging");
     window.MatiAudio?.play(reachedGoal ? "celebrate" : "encourage");

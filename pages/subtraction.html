@@ -36,7 +36,7 @@
             <p>Tienes 9 lápices y prestas 4. ¿Cuántos te quedan?</p>
             <div data-operation-example="subtraction"><div data-example-visuals></div><p class="apple-instruction" data-example-message aria-live="polite" aria-atomic="true"></p><p class="apple-equation" data-example-equation></p><div class="arithmetic-actions"><button type="button" data-example-next>Avanzar</button><button type="button" class="arithmetic-secondary" data-example-reset>Volver a empezar</button></div></div><noscript><p>Activa JavaScript para recorrer el ejemplo interactivo y practicar.</p></noscript>
           </article>
-          <div class="addition-practice-card"><div><h3>¿Listo para tu aventura?</h3><p>¡Cuenta los objetos y demuestra lo aprendido!</p></div><dl class="activity-facts" aria-label="Datos de la actividad"><div><dt>Ejercicios</dt><dd>10</dd></div><div><dt>Meta</dt><dd>8 de 10</dd></div><div><dt>Puntos por acierto</dt><dd>10</dd></div></dl>
+          <div class="addition-practice-card"><div><h3>¿Listo para tu aventura?</h3><p>¡Elige un nivel, cuenta los objetos y demuestra lo aprendido!</p></div><fieldset class="level-picker"><legend>Elige tu nivel</legend><div class="level-options"><label class="level-option"><input type="radio" name="level" value="1" data-level="1" /><span class="level-option-body"><strong data-level-name="1"></strong><span data-level-description="1"></span><em data-level-status="1"></em></span></label><label class="level-option"><input type="radio" name="level" value="2" data-level="2" /><span class="level-option-body"><strong data-level-name="2"></strong><span data-level-description="2"></span><em data-level-status="2"></em></span></label><label class="level-option"><input type="radio" name="level" value="3" data-level="3" /><span class="level-option-body"><strong data-level-name="3"></strong><span data-level-description="3"></span><em data-level-status="3"></em></span></label><label class="level-option"><input type="radio" name="level" value="4" data-level="4" /><span class="level-option-body"><strong data-level-name="4"></strong><span data-level-description="4"></span><em data-level-status="4"></em></span></label></div></fieldset><dl class="activity-facts" aria-label="Datos de la actividad"><div><dt>Ejercicios</dt><dd>10</dd></div><div><dt>Meta</dt><dd>8 de 10</dd></div><div><dt>Puntos por acierto</dt><dd>10</dd></div></dl>
           <button type="button" data-start>¡Vamos a practicar!</button><p class="addition-points-note">Cada acierto vale 10 puntos. Al repetir, sumas puntos nuevos cuando mejoras tu mejor resultado.</p></div>
         </section>
         <section data-practice aria-labelledby="question-title" hidden>
@@ -67,6 +67,7 @@
         </section>
         <section data-results aria-labelledby="result-title" hidden>
           <h2 id="result-title" tabindex="-1" data-result-title>Resultados</h2>
+          <p class="result-level" data-result-level></p>
           <div class="arithmetic-mati-dialogue"><img class="arithmetic-mati" src="../assets/images/mati-encouraging.png" alt="Mati te acompaña al revisar los resultados" data-result-mati /><div class="arithmetic-speech-bubble"><span class="arithmetic-speaker">Mati</span><p class="arithmetic-feedback" data-result-message data-speak></p></div></div>
           <dl class="arithmetic-results">
             <div><dt>Correctas</dt><dd data-result-correct>0</dd></div>
@@ -75,7 +76,8 @@
           </dl>
           <p data-points-earned></p><section class="review-topics" data-review-topics aria-labelledby="review-topics-title" hidden><h3 id="review-topics-title">¿Qué repasamos?</h3><p>Empieza por la operación que más necesita práctica.</p><div class="review-links" data-review-links></div></section>
           <div class="arithmetic-actions">
-            <button type="button" data-retry>Practicar de nuevo</button>
+            <button type="button" data-next-level hidden>Pasar al siguiente nivel</button>
+            <button type="button" data-retry>Repetir este nivel</button>
             <button type="button" class="arithmetic-secondary" data-review>Repasar explicación</button>
             <a href="menu.html">Volver al menú</a>
           </div>

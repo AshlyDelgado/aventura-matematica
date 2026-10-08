@@ -1,12 +1,13 @@
 /* Quantity models keep every drawing aligned with the exercise operands. */
 (() => {
   "use strict";
+  const stickers = (count) => `${count} ${count === 1 ? "calcomanía" : "calcomanías"}`;
   function describe(operation, question, answered = false) {
     const { a, b } = question;
     if (operation === "game-missing") return [{ label: question.visualLabel, count: question.visualTotal, kind: "token" }];
     if (operation === "addition") return [
-      { label: `Ya tienes ${a} calcomanías`, count: a, kind: "sticker" },
-      { label: `Recibes ${b} calcomanías más`, count: b, kind: "sticker", incoming: true },
+      { label: `Ya tienes ${stickers(a)}`, count: a, kind: "sticker" },
+      { label: `Recibes ${stickers(b)} más`, count: b, kind: "sticker", incoming: true },
     ];
     if (operation === "subtraction") return [
       { label: answered ? `Tenías ${a} lápices; prestaste ${b}` : `Tienes ${a} lápices. Vas a prestar ${b}`, count: a, kind: "pencil", removed: answered ? b : 0 },

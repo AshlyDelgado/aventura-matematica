@@ -160,6 +160,20 @@ test('every hidden-number exercise is read as one complete sentence', () => {
   }
 });
 
+test('every hidden-number situation is read sentence by sentence, ending with its question', () => {
+  const sandbox = vm.createContext({ window: {} });
+  vm.runInContext(fs.readFileSync(path.join(__dirname, '../js/missing-number.js'), 'utf8'), sandbox);
+  const { splitSentences } = audio().api;
+  for (const exercise of sandbox.window.ArithmeticLesson.exercises) {
+    const parts = splitSentences(exercise.statement);
+    assert.ok(parts.length >= 2, exercise.statement);
+    assert.match(parts.at(-1).text, /^¿.*\?$/, exercise.statement);
+    assert.equal(Array.from(parts, part => part.text).join(' '), exercise.statement);
+  }
+  const intro = 'Por ejemplo: tienes 2 manzanas y recibes algunas más, y ahora tienes 5. Se escribe 2 + ? = 5, y falta el 3, porque 2 + 3 = 5.';
+  assert.deepEqual(Array.from(splitSentences(intro), part => part.text), ['Por ejemplo: tienes 2 manzanas y recibes algunas más, y ahora tienes 5.', 'Se escribe 2 + ? = 5, y falta el 3, porque 2 + 3 = 5.']);
+});
+
 test('Mati prefers natural Spanish voices, then Google, and favors Costa Rican or Latin American accents', () => {
   const { chooseVoice } = audio().api;
   const synth = (voices) => ({ getVoices: () => voices });
