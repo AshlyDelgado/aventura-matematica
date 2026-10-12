@@ -118,3 +118,16 @@ Pruebas en Chrome real (perfil temporal y servidor HTTP local, anchos de 1280 y 
 El objetivo OA3 (problemas contextualizados de un solo paso) cita "actividades de refuerzo", y el juego "El número escondido" mostraba solo ecuaciones como `5 + ? = 8` con el mismo enunciado genérico. Ahora cada uno de sus doce ejercicios es un problema contextualizado: por ejemplo, "Tienes 5 calcomanías y recibes algunas más. Ahora tienes 8. ¿Cuántas calcomanías recibiste?", con la ecuación y las fichas de apoyo debajo. Hay tres situaciones por operación; las respuestas, la meta (diez de doce) y los puntos no cambiaron.
 
 Se recorrió el juego completo en Chrome real (1280 y 390 píxeles): las doce situaciones aparecen con su ecuación, se completan con el 100 % y no hay desbordamiento horizontal.
+
+## Revisión para tabletas del 11 de octubre de 2026
+
+Se midió el centrado de las siete pantallas (inicio, menú, identificar, módulo de sumar, evaluación final, juegos y número escondido) en Chrome real, con anchos de 360 a 1400 píxeles cada 20 y con tamaños de tabletas comunes (600×960, 744×1133, 768×1024, 810×1080, 820×1180, 834×1194, 962×601, 1024×768, 1024×1366, 1133×744, 1180×820, 1280×800 y 1366×1024). Se corrigió:
+
+- **Menú:** entre 400 y 700 píxeles de ancho el panel medía 390 píxeles y quedaba pegado a la izquierda (a 600 píxeles, 210 de espacio vacío a la derecha). Ahora se centra y llega hasta 600 píxeles de ancho.
+- **Inicio en tabletas verticales (600 a 899 píxeles):** la tarjeta era angosta y más alta que la pantalla (a 768×1024 se cortaba abajo). Ahora es más ancha, con las cuatro operaciones en una fila (en dos filas por debajo de 680 píxeles), cabe completa y queda centrada. Se ajustó la estrella y el título para que no se encimen con los adornos.
+- **Altura de pantalla:** inicio y menú usan la altura dinámica del navegador (`100dvh`) para que la barra de direcciones de tabletas y celulares no genere desplazamiento de más.
+- **Niveles:** el nombre y la descripción de cada nivel ya vienen escritos en el HTML, y el JavaScript los actualiza; así una carga lenta no deja una opción sin nombre. Una prueba comprueba que coincidan con los datos.
+
+Resultado: en todos los tamaños medidos el contenedor principal queda centrado, sin desbordamiento horizontal, y el inicio cabe sin cortarse. Se repitieron la auditoría con axe-core (34 vistas sin observaciones) y los recorridos funcionales de niveles, OA1, OA4 y el juego.
+
+Nota: el JavaScript de cada página se ejecuta cuando termina de cargar la hoja de fuentes de Google (entre 150 y 960 ms en las pruebas); sin conexión a Google, la página usa las fuentes de respaldo y carga en unos 100 ms.
