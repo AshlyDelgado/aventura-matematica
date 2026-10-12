@@ -275,6 +275,12 @@ test('the operation pages offer the four levels and the controls the script expe
       for (const part of ['name','description','status']) assert.ok(html.includes(`data-level-${part}="${number}"`),`${id} ${part} ${number}`);
     }
     assert.equal(html.includes('data-level="5"'),false);
+    // The names are already written in the page, so a slow load never leaves a level option without a label.
+    const { levels } = activity(id).lesson;
+    Array.from(levels).forEach((level,index) => {
+      assert.ok(html.includes(`data-level-name="${index + 1}">Nivel ${index + 1} · ${level.name}</strong>`),`${id}: name of level ${index + 1}`);
+      assert.ok(html.includes(`data-level-description="${index + 1}">${level.description}</span>`),`${id}: description of level ${index + 1}`);
+    });
     for (const attribute of ['data-next-level','data-result-level','data-start','data-retry']) assert.ok(html.includes(attribute),`${id} ${attribute}`);
     assert.ok(html.indexOf(`${id}.js`) < html.indexOf('arithmetic.js'),`${id} data loads before the shared script`);
   }
